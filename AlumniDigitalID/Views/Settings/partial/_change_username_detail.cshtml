@@ -1,0 +1,26 @@
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.User_model.Setting_model
+
+
+@using (Html.BeginForm("Update", "Settings", FormMethod.Post, new { enctype = "multipart/form-data", name = "change-username-form", id = "change-username-form" }))
+{
+    @Html.HiddenFor(m => m.UserId)
+    @Html.HiddenFor(m => m.Password)
+    @Html.HiddenFor(m => m.PinNumber)
+    @Html.HiddenFor(m => m.Mode)
+
+    <div class="row" id="div-validation" style="display: none;">
+        <div class="col mb-3">
+            <label for="html" id="error-message-label" class="form-label text-danger"></label><br>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col">
+            <label for="" class="form-label">Enter your new Username</label>
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control bg-white", @placeholder = "Enter your new username" })
+        </div>
+    </div>
+}
+
+
+

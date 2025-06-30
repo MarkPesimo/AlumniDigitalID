@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LJB4NZHTPY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-LJB4NZHTPY');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../../Content/Images/favicon.ico" type="image/x-icon" />
+
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+
+    <!-- Bootstrap & Icons -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+</head>
+
+
+<body class="d-flex flex-column min-vh-100">
+    @{
+        Html.RenderPartial("_HeaderMenu");
+    }
+
+    <div class="flex-grow-1 container-fluid mt-5 pt-4">
+        <div class="row">
+            <div class="col">
+                @RenderBody()
+            </div>
+        </div>
+
+        @{
+            Html.RenderPartial("~/Views/Shared/Toast/_Toasters.cshtml");
+        }
+    </div>
+    <footer class="footer-dark text-center">
+        Powered by ZMG Group
+    </footer>
+
+
+
+    <div class="preloader-container" id="preloader">
+        <div class="preloader"></div>
+    </div>
+
+
+    <!-- Scripts -->
+ 
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,10 @@
+﻿@model  List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Menu_model>
+ 
+@foreach (var m in Model)
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="@Url.Action(m.MenuAction, m.MenuController)"> 
+            <i class="fas @m.MenuIcon me-2 text-danger"></i> @m.MenuTitle 
+        </a>
+    </li>
+}

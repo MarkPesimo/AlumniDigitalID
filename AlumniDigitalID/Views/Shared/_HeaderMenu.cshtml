@@ -1,0 +1,66 @@
+﻿@using ZMGModel.ViewModel.ALUMNI.User
+
+<header>
+    <nav class="navbar navbar-light bg-white fixed-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <img src="/Content/Images/Logo/@((User as ContextLoginUser_model).NavLogo)" alt="Logo" height="40" />
+            </a>
+            <button class="btn text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideMenu" aria-label="Toggle menu">
+                <i class="fas fa-bars fs-4"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sideMenu">
+        
+
+        <div class="offcanvas-header" style="border-bottom: solid; border-color: #910124;">
+            <img src="/Content/Images/Logo/@((User as ContextLoginUser_model).NavLogo)" alt="Logo" style="padding: inherit;  margin:auto; width: 200px;  display: block;" />
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                @{
+                    Html.RenderAction("SideMenus", "Settings");
+                }
+
+
+                @*
+                <li class="nav-item">
+                    <a class="nav-link text-dark" id="nav-Home" href="@Url.Action("Index", "Alumni")"> <i class="fas fa-home me-2 text-danger"></i> HOME </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" id="nav-Profile" href="@Url.Action("Update", "Alumni")"> <i class="fas fa-id-badge me-2 text-danger"></i> PROFILE</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" id="nav-Perks" href="@Url.Action("Perks", "Perks")"> <i class="fas fa-gem me-2 text-danger"></i> PERKS & BENEFITS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" id="nav-Privacy" href="@Url.Action("Privacy", "Alumni")"><i class="fas fa-file-alt me-2 text-danger"></i> PRIVACY POLICY</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link  text-dark" id="nav-Terms" href="@Url.Action("Terms", "Alumni")"><i class="fas fa-file-contract me-2 text-danger"></i> TERMS & CONDITION</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" id="nav-Perks" href="@Url.Action("About", "Alumni")"> <i class="fas fa-info-circle me-2 text-danger"></i> ABOUT US </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" id="nav-Settings" href="@Url.Action("Index", "Settings")"><i class="fas fa-cog me-2 text-danger"></i> SETTINGS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" id="nav-Logout" href="@Url.Action("Logout", "Account")"><i class="fas fa-sign-out-alt me-2 text-danger"></i> LOGOUT</a>
+                </li>
+                *@
+
+            </ul>
+        </div>
+    </div>
+</header>

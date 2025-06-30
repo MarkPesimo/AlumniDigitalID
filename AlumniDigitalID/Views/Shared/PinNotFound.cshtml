@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Invalid Card";
+    Layout = "~/Views/Shared/Layout/_BlankLayout.cshtml";
+}
+
+@section Scripts{
+    <script src="~/Scripts/Home.js"></script>
+
+}
+
+<style>
+    body {
+        background-color: #edd2b7;
+    }
+
+    .card-error {
+        max-width: 380px;
+        margin: auto;
+        margin-top: 10vh;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+        .card-error i {
+            font-size: 3rem;
+            color: #dc3545;
+        }
+
+        .card-error h4 {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .card-error p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .card-error .btn {
+            margin-top: 20px;
+        }
+</style>
+
+
+<div class="card-error">
+    <i class="bi bi-x-circle-fill"></i>
+    <h4>Invalid Alumni Card</h4>
+    <p>The card number you entered is not recognized or no longer active. Please check your information or contact support for help.</p>
+    <a href="@Url.Action("Login", "ACcount")" class="btn btn-danger w-100">Login Manually</a>
+</div>

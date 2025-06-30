@@ -1,0 +1,43 @@
+﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Misc_model
+
+ 
+
+@section Scripts{
+    <script src="~/Scripts/Alumni/Misc.js"></script>
+
+}
+
+<div class="container">
+    <div class="privacy-banner text-center mb-4">
+        <h2 class="mt-4 mb-4">@ViewBag.Title</h2>
+    </div>
+
+    <div class="privacy-detail-card bg-white p-4 pt-1">
+        <div class="terms-detail-body">
+            @using (Html.BeginForm("Misc", "Alumni", FormMethod.Post, new { enctype = "multipart/form-data", name = "misc-update", id = "misc-update" }))
+            {
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.UserId);
+                @Html.HiddenFor(m => m.Type);
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description, new { @class = "font-weight-bold" })
+                            @Html.TextAreaFor(m => m.Description, 20, 40, new { @class = "form-control" })@*, @placeholder = "Description" })*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-12 text-right">
+                        <button type="button" class="btn btn-danger" id="submit-misc-update-button">SAVE CHANGES</button>
+                        <button type="button" class="btn btn-outline-secondary mr-2" id="cancel-misc-update-button">CANCEL</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

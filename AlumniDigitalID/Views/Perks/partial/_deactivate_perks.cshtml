@@ -1,0 +1,25 @@
+﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model
+
+
+
+
+@using (Html.BeginForm("_Deactivate", "Perks", FormMethod.Post, new { enctype = "multipart/form-data", name = "deactivate-perks-form", id = "deactivate-perks-form" }))
+{
+
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.DateCreated)
+    @Html.HiddenFor(m => m.FileType)
+    @Html.HiddenFor(m => m.SchoolId)
+    @Html.HiddenFor(m => m.CourseId)
+    @Html.HiddenFor(m => m.Guid)
+    @Html.HiddenFor(m => m.UserId)
+
+    @Html.HiddenFor(m => m.Title)
+    @Html.HiddenFor(m => m.Description)
+    @Html.HiddenFor(m => m.AlumniGroupId)
+
+    <p>Are you sure you want to deactivate this Perks?</p>
+}
+
+

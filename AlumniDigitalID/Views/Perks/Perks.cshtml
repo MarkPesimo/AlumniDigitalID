@@ -1,0 +1,34 @@
+﻿@model  List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model>
+
+@{
+    ViewBag.Title = "Perks & Benefits";
+}
+
+@section Scripts{
+    <script src="~/Scripts/Home.js"></script>
+    @*<script src="~/Scripts/Alumni/Perks.js"></script>*@
+}
+
+<div class="container">
+    <div class="perks-banner text-center mb-4">
+        <h2 class="mt-4 mb-4">Perks & Benefits</h2>
+    </div>
+
+    <div class="row">
+        @foreach (var perk in Model)
+        {
+            <div class="col-6 col-lg-3 col-md-4 mb-2">
+                <div class="perk-card">
+                    <div class="perks-image">
+                        <div class="perk-image mb-3" style="background-image:url('../PerksAttachment/@perk.Id@perk.FileType')"></div>
+                    </div>
+                    <div class="perks-control">
+                        <h5 class="perk-title">@perk.Title</h5>
+                        <a href="@Url.Action("PerkByGuid", "Perks", new { _guid = @perk.Guid })" class="btn btn-danger mt-2" id="@perk.Id" guid="@perk.Guid">LEARN MORE</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+ 

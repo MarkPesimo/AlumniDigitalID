@@ -1,0 +1,112 @@
+﻿
+@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.User_model.Pin_model
+
+@{
+    ViewBag.Title = "Digital ID Authentication";
+    Layout = "~/Views/Shared/Layout/_BlankLayout.cshtml";
+}
+
+
+@section Scripts
+{
+    <script src="~/Scripts/User/Pin.js"></script>
+}
+
+<style>
+    body {
+        background-color: #edd2b7;
+    }
+
+    .pin-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: darkred;
+        display: inline-block;
+        margin: 0 6px;
+    }
+</style>
+ 
+
+<div class="d-flex flex-column justify-content-center align-items-center vh-100">
+    <div class="text-center bg-white p-5 rounded shadow" style="width: 100%; max-width: 350px;">
+        <img src="~/Content/images/@Model.AlumniLogo" alt="Logo" height="60" class="mb-3" />
+        <h5><strong>@Model.AlumniName</strong></h5>
+     
+
+        @using (Html.BeginForm("Pin", "User", FormMethod.Post, new { id = "pin-form", name = "pin-form", }))
+        {
+            @Html.HiddenFor(m => m.GuidId)
+            @Html.HiddenFor(m => m.SchoolId)
+
+            <p class="mt-4 mb-2"><strong>Enter your PIN</strong></p>
+
+            <div class="row" id="div-validation" style="display: none;">
+                <div class="col-lg-12 mb-3">
+                    <label for="html" id="error-message-label" class="form-label text-danger"></label><br>
+                </div>
+            </div>
+
+            <div class="form-group mb-2">
+                @Html.ValidationMessageFor(model => model.PinNumber, null, new { @class = "form-control-sm zips-label", @style = "color:red" })
+                <div class="row">
+                    <div class="input-group">
+
+                        @Html.PasswordFor(m => m.PinNumber, new { @class = "form-control bg-white text-center", @style = "font-size: 24px; letter-spacing: 10px; " })
+                    </div>
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn mt-2 w-100 btn-danger" id="authenticate-btn">Login</button>
+        }
+        
+        @*<div class="mt-3">
+            <a href="#" class="text-muted small">Forgot your pin?</a>
+        </div>*@
+    </div>
+</div>
+<!--
+<section class="login d-flex align-items-center">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <h1 class="login-logo text-center text-white mb-4">
+                    <i class="fa-solid fa-fingerprint"></i> <span class="ms-3">DigitalID</span>
+
+                </h1>
+
+
+                @using (Html.BeginForm("Pin", "User", FormMethod.Post, new { id = "pin-form", name="pin-form", @class = "login-form shadow-sm border border-light" }))
+                {
+                    @Html.HiddenFor(m => m.GuidId)
+                    @Html.HiddenFor(m => m.SchoolId)
+
+                    <div class="row" id="div-validation" style="display: none;">
+                        <div class="col-lg-12 mb-3">
+                            <label for="html" id="error-message-label" class="form-label text-danger"></label><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        @Html.ValidationMessageFor(model => model.PinNumber, null, new { @class = "form-control-sm zips-label", @style = "color:red" })
+                        <div class="row">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-calculator"></i>
+                                </span>
+                                @Html.PasswordFor(m => m.PinNumber, new { @class = "form-control bg-white", @placeholder = "Enter your PIN number" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn mt-2 w-100 btn-secondary" id="authenticate-btn">Authenticate</button>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    -->

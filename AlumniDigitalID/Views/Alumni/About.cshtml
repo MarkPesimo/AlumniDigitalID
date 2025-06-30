@@ -1,0 +1,25 @@
+﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Misc_model
+
+
+@{
+    ViewBag.Title = "About";
+}
+
+@section Scripts{
+    <script src="~/Scripts/Home.js"></script>
+
+}
+
+<div class="container">
+    <div class="about-banner text-center mb-4">
+        <h2 class="mt-4 mb-4">ABOUT US</h2>
+    </div>
+
+    <div class="about-detail-card bg-white p-4 pt-1">
+        <div class="perk-detail-body">
+            <p class="perk-detail-text">
+                @(new HtmlString(@Model.Description))
+            </p>
+        </div>
+    </div>
+</div>

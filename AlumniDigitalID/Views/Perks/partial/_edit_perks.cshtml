@@ -1,0 +1,47 @@
+﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model
+
+
+
+
+@using (Html.BeginForm("_Edit", "Perks", FormMethod.Post, new { enctype = "multipart/form-data", name = "edit-perks-form", id = "edit-perks-form" }))
+{
+
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.DateCreated)
+    @Html.HiddenFor(m => m.FileType)
+    @Html.HiddenFor(m => m.SchoolId)
+    @Html.HiddenFor(m => m.CourseId)
+    @Html.HiddenFor(m => m.Guid)
+    @Html.HiddenFor(m => m.UserId)
+    @Html.HiddenFor(m => m.AlumniGroupId)
+
+    <div class="row" id="div-validation" style="display: none;">
+        <div class="col mb-3">
+            <label for="html" id="error-message-label" class="form-label text-danger"></label><br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col mb-3">
+            <label for="" class="form-label">Title</label>
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label for="" class="form-label">Description</label>
+            @Html.TextAreaFor(m => m.Description, 8, 40, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <label for="" class="form-label text-danger">* Please limit the attachment file size to 3mb.</label>
+        <div class="col">
+            <input class="form-control" type="file" name="edit_perks_Attachment" id="edit_perks_Attachment">
+        </div>
+    </div>
+}
+
+

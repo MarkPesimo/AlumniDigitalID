@@ -1,0 +1,24 @@
+﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Misc_model
+
+@{
+    ViewBag.Title = "Terms & Condition";
+}
+
+@section Scripts{
+    <script src="~/Scripts/Home.js"></script>
+}
+
+
+<div class="container">
+    <div class="terms-banner text-center mb-4">
+        <h2 class="mt-4 mb-4">TERMS AND CONDITIONS</h2>
+    </div>
+
+    <div class="terms-detail-card bg-white p-4 pt-1">
+        <div class="terms-detail-body">
+            <p class="terms-detail-text">
+                @(new HtmlString(@Model.Description))
+            </p>
+        </div>
+    </div>
+</div>

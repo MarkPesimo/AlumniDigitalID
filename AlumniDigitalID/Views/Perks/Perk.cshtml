@@ -1,0 +1,53 @@
+﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model
+
+@{
+    ViewBag.Title = Model.Title + " - Perk Details";
+}
+
+@section Scripts{
+    <script src="~/Scripts/Home.js"></script>
+}
+
+
+<div class="container perk-detail-container">
+    <div class="perk-detail-banner mb-0">
+        <div class="perk-header">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <a href="@Url.Action("Perks", "Perks")" class="btn btn-primary">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                </div>
+                <div class="col text-center">
+                    <h4 class="mb-0">PERKS & BENEFITS</h4>
+                </div>
+            </div>
+        </div>
+        <div class="perk-detail-image" style="background-image:url('../PerksAttachment/@Model.Id@Model.FileType')"></div>
+    </div>
+
+    <div class="perk-detail-card bg-white p-4">
+        <div class="perk-detail-body">
+            <h3 class="perk-detail-title">@Model.Title</h3>
+            <p class="perk-detail-text">@Model.Description</p>
+        </div>
+    </div>
+</div>
+
+
+<!--
+<div class="container perk-detail-container">
+    <div class="perk-detail-banner text-center mb-4">
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Perks", "Alumni")" class="btn btn-primary">BACK TO PERKS</a>
+        </div>
+        <div class="perk-detail-image" style="background-image:url('../Perks/@Model.Id@Model.FileType')"></div>
+    </div>
+
+    <div class="perk-detail-card">
+        <div class="perk-detail-body">
+            <h3 class="perk-detail-title">@Model.Title</h3>
+            <p class="perk-detail-text">@Model.Description</p>
+        </div>
+    </div>
+</div>-->

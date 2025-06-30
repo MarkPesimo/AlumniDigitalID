@@ -1,0 +1,255 @@
+﻿:root {
+    --borderA: 1px dashed crimson;
+    --borderB: 1px dashed forestgreen;
+    --borderC: 1px dashed dodgerblue;
+    --borderD: 1px dashed gold;
+    --borderE: 1px dashed magenta;
+    --borderF: 1px dashed cyan;
+    --borderG: 1px dashed slategray;
+    --zips_blue: #0c4496;
+    --zips_yellow: #ffbc05;
+    --zips_light_blue: #ebf0f7;
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url(/Content/media/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: FrizQuadrata;
+    src: url(/Content/media/fonts/FrizQuadrataStd.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Montserrat;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--zips_light_blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CARD - START */
+.pCard {
+    position: relative;
+    width: 95%;
+    max-width: 400px;
+    height: 615px;
+    /* .pCard height(615) = .pCard_up height (437) + .pCard_down height (178) */
+    border: 5px outset #002e74;
+    border-radius: 30px;
+    box-shadow: 0 20px 70px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: 0.5s ease-in-out;
+}
+    /* CARD - END */
+
+
+
+    /* CARD TOP - START */
+    .pCard .pCard_top {
+        position: absolute;
+        width: 100%;
+        height: 437px;
+        /* .pCard height(615) = .pCard_up height (437) + .pCard_down height (178) */
+        background-image: url(media/profile-img.jpg);
+        background-position: 50%;
+        background-size: cover;
+        z-index: 3;
+        transition: 0.5s ease-in-out;
+    }
+
+        .pCard .pCard_top .pCard_filter {
+            height: 100%;
+            background: rgba(12, 68, 150, 0);
+            transition: 0.5s ease-in-out;
+        }
+
+        .pCard .pCard_top .pCard_add {
+            position: absolute;
+            top: 392px;
+            left: 0;
+            right: 0;
+            width: 88px;
+            height: 88px;
+            margin: auto;
+            display: grid;
+            place-items: center;
+            background: var(--zips_yellow);
+            border-radius: 50%;
+            box-shadow: 0 5px 24px 0 rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+        }
+
+            .pCard .pCard_top .pCard_add i {
+                font-size: 3rem;
+                font-weight: bolder;
+                color: rgba(0, 0, 0, 0.5);
+            }
+    /* CARD TOP - END */
+
+
+
+    /* CARD BOTTOM - START */
+    .pCard .pCard_bottom {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 178px;
+        /* .pCard height(615) = .pCard_up height (437) + .pCard_down height (178) */
+        padding-top: 40px;
+        background: var(--zips_blue);
+        color: #fff;
+        text-align: center;
+        z-index: 2;
+        transition: 0.5s ease-in-out;
+    }
+
+        .pCard .pCard_bottom .pCard_text {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+            .pCard .pCard_bottom .pCard_text .employee_name {
+                font-size: 16px;
+                line-height: 2rem;
+                transition: 0.5s ease-in-out;
+            }
+
+            .pCard .pCard_bottom .pCard_text h2 {
+                text-transform: uppercase;
+                text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+                letter-spacing: 2px;
+                color: #ffbc05;
+            }
+
+            .pCard .pCard_bottom .pCard_text .employee_id {
+                display: flex;
+                gap: 10px;
+                margin-top: 5px;
+                font-size: 18px;
+                transition: 0.5s ease-in-out;
+            }
+
+            .pCard .pCard_bottom .pCard_text p {
+                letter-spacing: 3px;
+                font-weight: 600;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+    /* CARD BOTTOM - END */
+
+
+
+    /* CARD BACK - START */
+    .pCard .pCard_back {
+        position: absolute;
+        top: 138px;
+        bottom: 100px;
+        width: 100%;
+        background: #fff;
+        color: var(--zips_blue);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+        .pCard .pCard_back h2 {
+            width: 90%;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .pCard .pCard_back .pCard_id {
+            width: 90%;
+        }
+
+            .pCard .pCard_back .pCard_id div {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                background: var(--zips_light_blue);
+                box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                padding: 1rem;
+                margin: 1rem;
+                border-radius: 1rem;
+                font-size: 12px;
+            }
+
+                .pCard .pCard_back .pCard_id div p:first-of-type {
+                    font-weight: 500;
+                    letter-spacing: 2px;
+                }
+
+                .pCard .pCard_back .pCard_id div p:last-of-type {
+                    font-weight: 600;
+                    letter-spacing: 2px;
+                }
+/* CARD BACK - END */
+
+
+
+/* CARD ON - START */
+.pCard_on .pCard_top {
+    height: 138px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+    .pCard_on .pCard_top .pCard_filter {
+        background: rgba(12, 68, 150, 0.3);
+    }
+
+    .pCard_on .pCard_top .pCard_add {
+        transform: rotate(360deg) scale(0.5);
+        top: 460px;
+    }
+
+.pCard_on .pCard_bottom {
+    padding-top: 5px;
+    height: 100px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+
+    .pCard_on .pCard_bottom .pCard_text .employee_name {
+        font-size: 12px;
+        line-height: 1rem
+    }
+
+    .pCard_on .pCard_bottom .pCard_text .employee_id {
+        font-size: 14px;
+    }
+/* CARD ON - END */
+
+/*widget*/
+.widget-remarks-container {
+    max-height: 300px;
+    overflow: auto;
+}
+
+    .widget-remarks-container .current-remarks {
+        padding-bottom: 1rem;
+    }
+
+        .widget-remarks-container .current-remarks:not(:first-of-type) {
+            padding-top: 1rem;
+        }
+
+        .widget-remarks-container .current-remarks:not(:last-of-type) {
+            border-bottom: 1px solid #efefef;
+        }
+/*widget*/

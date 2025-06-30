@@ -1,0 +1,77 @@
+﻿@model  List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model>
+
+
+@{
+    ViewBag.Title = "Perks & Benifits";
+}
+
+@section Scripts{
+    <script src="~/Scripts/Home.js"></script>
+    <script src="~/Scripts/Perks/Perks.js"></script>
+}
+
+<div class="container">
+    <div class="perks-banner text-center mb-4">
+        <h2 class="mt-4 mb-4">Perks & Benefits</h2>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-4"><button class="btn btn-sm btn-danger" id="add-perk-btn"><i class="bi bi-plus-lg"></i> Add Perk</button></div>
+        <div class="col-8"></div>
+    </div>
+
+    <div class="row">
+        <table class="table table-sm" id="perks-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Perks Title</th>
+                    <th scope="col">Created by</th>
+                    @*<th scope="col">Date Created</th>*@
+                    <th scope="col">
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var perk in Model)
+                {
+                    <tr>
+                        <td>@perk.Title</td>
+                        <td>
+                            <div>
+                                @perk.CreatedBy <br />
+                                @perk.DateCreated.ToShortDateString()
+                            </div>
+                            
+                        </td>
+                        @*<td></td>*@
+
+                        @*
+                            <td><p style="font-size: 10px">@perk.Title</p></td>
+                            <td><p style="font-size: 10px">@perk.CreatedBy</p></td>
+                            <td><p style="font-size: 10px">@perk.DateCreated</p></td>
+                        *@
+
+                        <td>
+                            <div>
+                                <button class="btn btn-sm btn-secondary edit-perk-btn" guid="@perk.Guid"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-success activate-perk-btn" @perk.ActivateProp guid="@perk.Guid"><i class="bi bi-check-circle"></i></button>
+                                <button class="btn btn-sm btn-danger deactivate-perk-btn" @perk.DeactivateProp guid="@perk.Guid"><i class="bi bi-x-circle"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@Html.Partial("~/Views/Perks/Modal/_add_perks_modal.cshtml")
+@Html.Partial("~/Views/Perks/Modal/_edit_perks_modal.cshtml")
+@Html.Partial("~/Views/Perks/Modal/_activate_perks_modal.cshtml")
+@Html.Partial("~/Views/Perks/Modal/_deactivate_perks_modal.cshtml")
