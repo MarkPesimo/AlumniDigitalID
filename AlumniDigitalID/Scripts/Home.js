@@ -9,7 +9,7 @@
         if (show === 'SHOW') { x.style.visibility = ''; }
         else { x.style.visibility = 'hidden'; }
     }
-
+       
     $("#generate-qrcode-button").click(function (e) {
         ShowLoading('SHOW');
         $.ajax({
