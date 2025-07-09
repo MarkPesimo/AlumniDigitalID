@@ -57,8 +57,8 @@
                                 @*<a href="@Url.Action("AdminUpdate", "Alumni", new { _selected_guid = member.Guid})" class="btn btn-sm btn-secondary"> <i class="bi bi-pencil-square"></i></a>*@
 
                                 <button class="btn btn-sm btn-secondary edit-member-btn" @member.Edit_prop guid="@member.Guid"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-success activate-member-btn" @member.Activate_prop guid="@member.Guid"><i class="bi bi-check-circle"></i></button>
-                                <button class="btn btn-sm btn-danger deactivate-member-btn" @member.Deactivate_prop guid="@member.Guid"><i class="bi bi-x-circle"></i></button>
+                                <button class="btn btn-sm btn-danger activate-member-btn" @member.Activate_prop guid="@member.Guid"><i class="bi bi-x-circle"></i></button>
+                                <button class="btn btn-sm btn-success deactivate-member-btn" @member.Deactivate_prop guid="@member.Guid"><i class="bi bi-check-circle"></i></button>
                             </div>
                         </td>
                     </tr>
