@@ -83,6 +83,72 @@ namespace AlumniDigitalID.Controllers
 
         }
 
+    
+
+        [HttpGet]
+        public ActionResult Members()
+        {
+            try
+            {
+                if (_usertype == "User")
+                {
+                    Profile_model _model = _alumnirepository.GetProfileByGuid(_guid);
+                    return View(_model);
+                }
+                else
+                {
+                    List<Members_model> _model = _alumnirepository.GetMembers(_alumnigroupid);
+                    return View(_model);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }            
+        }
+ 
+        [HttpGet]
+        public ActionResult _Activate(string _guid)
+        {
+            Members_model _model = _alumnirepository.GetMember(_guid);
+            _model.Mode = 3;
+            return PartialView("~/Views/Alumni/partial/_activate_member.cshtml", _model);
+        }
+
+        [HttpGet]
+        public ActionResult _Deactivate(string _guid)
+        {
+            Members_model _model = _alumnirepository.GetMember(_guid);
+            _model.Mode = 2;
+            return PartialView("~/Views/Alumni/partial/_deactivate_member.cshtml", _model);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult ActivateDeactivate(Members_model _model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {                    
+                    int _id = _alumnirepository.ActivateDeactive(_model);
+                    
+                    return Json(new { Result = "Success", Id = _id });
+                }
+
+                List<string> _errors = _globalrepository.GetModelErrors(ModelState);
+                return Json(new { Result = "ERROR", Message = _errors[1], ElementName = _errors[0] });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
+ 
+
+        //=====================================================================================
         [HttpGet]
         public ActionResult Info(string guid)
         {
@@ -119,6 +185,48 @@ namespace AlumniDigitalID.Controllers
 
         }
 
+
+        [HttpGet]
+        public ActionResult Edit(string _guid)
+        {
+            try
+            {
+                Profile_model _model = _alumnirepository.GetProfileByGuid(_guid);
+                ViewBag._Gender = _globalrepository.GetGender().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
+                ViewBag._CivilStatus = _globalrepository.GetCivilStatus().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
+                ViewBag._Courses = _courserepository.GetSchoolCourses(_schoolid, _alumnigroupid).Select(t => new SelectListItem { Text = t.CourseName, Value = t.Id.ToString() }).ToList();
+
+                
+                return PartialView("~/Views/Alumni/partial/_edit.cshtml", _model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Profile_model _model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int _id = _alumnirepository.UpdateProfile(_model);
+
+                    return Json(new { Result = "Success", Id = _id });
+                }
+
+                List<string> _errors = _globalrepository.GetModelErrors(ModelState);
+                return Json(new { Result = "ERROR", Message = _errors[1], ElementName = _errors[0] });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
 
         [HttpGet]
         public ActionResult Update()

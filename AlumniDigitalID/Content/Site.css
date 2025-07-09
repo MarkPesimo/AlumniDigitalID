@@ -328,3 +328,16 @@ footer {
     margin-right: auto;
     /*width: 50%;*/
 }
+
+
+.alumni-members-image {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: block;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 50%;*/
+}

@@ -1,0 +1,180 @@
+﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model.Profile_model
+
+
+
+<div class="container">
+    <div class="profile-banner text-center mb-4">
+        <div class="row">
+            <div class="col-sm-1">
+                <img src="~/AlumniImages/@(Model.Guid).JPEG"
+                     class="alumni-profile-image"
+                     id="alumni-profile-image"
+                     alt="Responsive image"
+                     onerror="this.src='/AlumniImages/0.JPEG'" />
+            </div>
+            <div class="col-sm-11">
+                <h3 class="mt-3 text-white"><b>@Model.Firstname.ToUpper() @Model.Middlename.ToUpper() @Model.Lastname.ToUpper()</b></h3>
+            </div>
+        </div>
+
+        @*<div class="text-right">
+                <a href="#" class="btn btn-link">EDIT PROFILE ▶</a>
+            </div>*@
+    </div>
+
+
+    @using (Html.BeginForm("Add", "Overtime", FormMethod.Post, new { enctype = "multipart/form-data", name = "edit-member-form", id = "edit-member-form" }))
+    {
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.SchoolId)
+        @Html.HiddenFor(m => m.SchoolName)
+        @Html.HiddenFor(m => m.CourseName)
+        @Html.HiddenFor(m => m.MembershipExpiration)
+        @Html.HiddenFor(m => m.UserType)
+        @Html.HiddenFor(m => m.UserId)
+        @Html.HiddenFor(m => m.Guid)
+        @Html.HiddenFor(m => m.Nationality)
+        @Html.HiddenFor(m => m.AlumniGroupId)
+
+        <div class="row" id="div-validation" style="display: none;">
+            <div class="col mb-3">
+                <label for="html" id="error-message-label" class="form-label text-danger"></label><br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.AlumniNo, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.AlumniNo, new { @class = "form-control bg-secondary text-center text-white", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MemberType, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.MemberType, new { @class = "form-control bg-secondary text-center text-white", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Firstname, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.Firstname, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Lastname, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.Lastname, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Middlename, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.Middlename, new { @class = "form-control" })
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Gender, new { @class = "font-weight-bold" })
+                    @Html.DropDownListFor(m => m.Gender, (IEnumerable<SelectListItem>)ViewBag._Gender, new { @class = "form-select", })
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CivilStatus, new { @class = "font-weight-bold" })
+                    @Html.DropDownListFor(m => m.CivilStatus, (IEnumerable<SelectListItem>)ViewBag._CivilStatus, new { @class = "form-select", })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Birthday, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @type = "date", @Value = Model.Birthday.ToString("yyyy-MM-dd") })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EmailAddress, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MobileNo, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row mt-2">
+            <div class="col">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address, new { @class = "font-weight-bold" })
+                    @Html.TextAreaFor(m => m.Address, 4, 40, new { @class = "form-control" })@*, @placeholder = "Description" })*@
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.YearGraduated, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.YearGraduated, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SectionName, new { @class = "font-weight-bold" })
+                    @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CourseId, new { @class = "font-weight-bold" })
+                    @Html.DropDownListFor(m => m.CourseId, (IEnumerable<SelectListItem>)ViewBag._Courses, new { @class = "form-select", })
+                </div>
+            </div>
+        </div>
+
+ 
+    }
+
+    @*<div class="row mt-4">
+
+            <button type="button" class="btn  btn-danger" id="submit-update-button">
+                <i class="fa-regular fa-circle-check me-2"></i> Submit Update
+            </button>
+        </div>*@
+
+</div>
