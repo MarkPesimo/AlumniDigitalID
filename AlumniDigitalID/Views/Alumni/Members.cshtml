@@ -1,0 +1,73 @@
+﻿@model  List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Members_model>
+
+@{
+    ViewBag.Title = "Members";
+}
+
+@section Scripts{
+    <script src="~/Scripts/Home.js"></script>
+    <script src="~/Scripts/Alumni/Member.js"></script>
+}
+
+<div class="container">
+    <div class="perks-banner text-center mb-4">
+        <h2 class="mt-4 mb-4">Members</h2>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-4"><button class="btn btn-sm btn-danger" id="add-perk-btn"><i class="bi bi-plus-lg"></i> Add Members</button></div>
+        <div class="col-8"></div>
+    </div>
+
+    <div class="row">
+        <table class="table table-sm" id="members-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Member Name</th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var member in Model)
+                {
+                    <tr>
+                        <td>
+                            <div>
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <img src="~/AlumniImages/@(member.Guid).JPEG"
+                                             class="alumni-members-image"
+                                             id="alumni-profile-image"
+                                             alt="Responsive image"
+                                             onerror="this.src='/AlumniImages/0.JPEG'" />
+                                    </div>
+                                    <div class="col">
+                                        <strong class="text-primary">@member.MembersName </strong><br />
+                                        @member.Course<br />
+                                        <small>@member.MemberType</small><br />
+                                        <small>@member.Batch</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div>
+                                @*<a href="@Url.Action("AdminUpdate", "Alumni", new { _selected_guid = member.Guid})" class="btn btn-sm btn-secondary"> <i class="bi bi-pencil-square"></i></a>*@
+
+                                <button class="btn btn-sm btn-secondary edit-member-btn" @member.Edit_prop guid="@member.Guid"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-sm btn-success activate-member-btn" @member.Activate_prop guid="@member.Guid"><i class="bi bi-check-circle"></i></button>
+                                <button class="btn btn-sm btn-danger deactivate-member-btn" @member.Deactivate_prop guid="@member.Guid"><i class="bi bi-x-circle"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Alumni/modal/_edit_member_modal.cshtml")
+@Html.Partial("~/Views/Alumni/modal/_activate_member_modal.cshtml")
+@Html.Partial("~/Views/Alumni/modal/_deactivate_member_modal.cshtml")

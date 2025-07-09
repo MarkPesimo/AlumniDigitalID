@@ -1,0 +1,23 @@
+﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Members_model
+
+
+@using (Html.BeginForm("_Activate", "Perks", FormMethod.Post, new { enctype = "multipart/form-data", name = "deactivate-member-form", id = "deactivate-member-form" }))
+{
+
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Guid)
+    @Html.HiddenFor(m => m.MembersName)
+    @Html.HiddenFor(m => m.Course)
+    @Html.HiddenFor(m => m.Batch)
+    @Html.HiddenFor(m => m.MemberType)
+    @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.Edit_prop)
+    @Html.HiddenFor(m => m.Activate_prop)
+    @Html.HiddenFor(m => m.Deactivate_prop)
+    @Html.HiddenFor(m => m.UserId)
+    @Html.HiddenFor(m => m.Mode)
+
+    <p>Are you sure you want to deactivate this Member?</p>
+}
+
+

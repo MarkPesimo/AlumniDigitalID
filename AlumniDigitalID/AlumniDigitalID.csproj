@@ -206,6 +206,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site__.css" />
     <Content Include="PerksAttachment\1.png" />
+    <Content Include="Scripts\Alumni\Member.js" />
     <Content Include="Scripts\Alumni\Misc.js" />
     <Content Include="Scripts\Perks\Perks.js" />
     <Content Include="Scripts\Global\core.min.js" />
@@ -303,6 +304,13 @@
     <Content Include="Views\Perks\partial\_deactivate_perks.cshtml" />
     <Content Include="Views\Perks\modal\_deactivate_perks_modal.cshtml" />
     <Content Include="Views\Alumni\List.cshtml" />
+    <Content Include="Views\Alumni\Members.cshtml" />
+    <Content Include="Views\Alumni\modal\_deactivate_member_modal.cshtml" />
+    <Content Include="Views\Alumni\modal\_activate_member_modal.cshtml" />
+    <Content Include="Views\Alumni\partial\_deactivate_member.cshtml" />
+    <Content Include="Views\Alumni\partial\_activate_member.cshtml" />
+    <Content Include="Views\Alumni\modal\_edit_member_modal.cshtml" />
+    <Content Include="Views\Alumni\partial\_edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

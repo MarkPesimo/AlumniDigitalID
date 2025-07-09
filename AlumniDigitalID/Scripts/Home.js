@@ -14,20 +14,20 @@
         ShowLoading('SHOW');
         $.ajax({
             type: "POST",
-            url: ' https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example',
+            url: 'https://www.qrcode-monkey.com/',
             data: {           
                 "data": "https://www.qrcode-monkey.com",
                 "config": {
                     "body": "circle",
-                    "logo": "#facebook"
+                    //"logo": "#facebook"
                 },
                 "size": 300,
-                "download": false,
+                "download": true,
                 "file": "svg"
             },
             dataType: "html",
             success: function (response) {
-                alert(response);
+                //alert(response);
                 console.log(response);
                  
                 ShowLoading('HIDE');
