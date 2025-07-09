@@ -17,14 +17,14 @@
     <div class="row">
         @foreach (var perk in Model)
         {
-            <div class="col-6 col-lg-3 col-md-4 mb-2">
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
                 <div class="perk-card">
                     <div class="perks-image">
                         <div class="perk-image mb-3" style="background-image:url('../PerksAttachment/@perk.Id@perk.FileType')"></div>
                     </div>
                     <div class="perks-control">
                         <h5 class="perk-title">@perk.Title</h5>
-                        <a href="@Url.Action("PerkByGuid", "Perks", new { _guid = @perk.Guid })" class="btn btn-danger mt-2" id="@perk.Id" guid="@perk.Guid">LEARN MORE</a>
+                        <a href="@Url.Action("PerkByGuid", "Perks", new { _guid = perk.Guid })" class="btn btn-danger mt-2" id="@perk.Id" guid="@perk.Guid">LEARN MORE</a>
                     </div>
                 </div>
             </div>

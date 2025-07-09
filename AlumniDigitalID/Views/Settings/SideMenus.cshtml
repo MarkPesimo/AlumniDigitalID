@@ -2,7 +2,7 @@
  
 @foreach (var m in Model)
 {
-    <li class="nav-item">
+    <li class="nav-item side-menu">
         <a class="nav-link text-dark" href="@Url.Action(m.MenuAction, m.MenuController)"> 
             <i class="fas @m.MenuIcon me-2 text-danger"></i> @m.MenuTitle 
         </a>

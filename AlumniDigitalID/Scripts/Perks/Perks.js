@@ -21,9 +21,19 @@
         //    }
         //});
 
-        new DataTable('#perks-table');
+        new DataTable('#perks-table', {
+            searching: false
+        });
 
         $('.dt-length').addClass('d-none');
+
+        //  Custom search functionality ---- kbejar  7/3/25 ----
+        $('#perk-search').on('keyup', function () {
+            const value = $(this).val().toLowerCase();
+            $('#perks-table tbody tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
     });
 
     //$('.perks-control').on('click', '.perk-btn-primary', function (e) {

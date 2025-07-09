@@ -3,7 +3,7 @@
 <header>
     <nav class="navbar navbar-light bg-white fixed-top shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+            <a class="navbar-brand" asp-controller="Alumni" asp-action="Index">
                 <img src="/Content/Images/Logo/@((User as ContextLoginUser_model).NavLogo)" alt="Logo" height="40" />
             </a>
             <button class="btn text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideMenu" aria-label="Toggle menu">
@@ -15,7 +15,7 @@
     <div class="offcanvas offcanvas-end" tabindex="-1" id="sideMenu">
         
 
-        <div class="offcanvas-header" style="border-bottom: solid; border-color: #910124;">
+        <div class="offcanvas-header" style="border-bottom: solid; border-color: #910124; align-content: center;">
             <img src="/Content/Images/Logo/@((User as ContextLoginUser_model).NavLogo)" alt="Logo" style="padding: inherit;  margin:auto; width: 200px;  display: block;" />
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>

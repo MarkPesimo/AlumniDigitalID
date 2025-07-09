@@ -18,11 +18,17 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
+    /*font-family: 'Segoe UI', sans-serif;*/
+    font-family: 'Roboto', sans-serif;
     background-color: #fff;
     color: #000;
     margin: 0;
     padding: 0;
+}
+
+.side-menu {
+    border-bottom: 2px solid;
+    color: #EDD3B8;
 }
 
 .footer-dark {
@@ -114,6 +120,8 @@ body {
     font-weight: 500;
 }
 
+
+
 .icon-color {
     color: #E4C9AB;
 }
@@ -129,6 +137,17 @@ body {
     border-color: #6c757d;
     border-radius: 8px;
 }
+
+.btn-primary {
+    background-color: #AF0D18;
+    border-color: #AF0D18;
+    color: #E4C9AB;
+}
+
+    .btn-primary:hover {
+        background-color: #d81b60;
+        border-color: #c2185b;
+    }
 
 footer {
     font-size: 0.85em;
@@ -152,8 +171,49 @@ footer {
     color: white;
 }
 
-/*Perks Style */
+.alumni-profile-image {
+    transition: 0.3s;
+}
 
+    .alumni-profile-image:hover {
+        opacity: 0.8;
+    }
+
+#preview-profile-image:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.modal-content {
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.profile-btn .btn {
+    border-radius: 20px;
+    border-color: #910124;
+}
+
+.font-weight-bold {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+
+
+/*Perks Style */
 .perks-container {
     max-width: 800px;
     padding: 2rem;
@@ -171,40 +231,68 @@ footer {
 }
 
 .perk-card {
-    border: 1px;
-    transition: transform 0.3s ease;
-    border-radius: 8px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1rem;
     text-align: center;
-    margin-bottom: 15px;
+    transition: transform 0.2s ease-in-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+    .perk-card:hover {
+        transform: translateY(-4px);
+    }
+
 .perk-image {
-    height: 120px;
     width: 100%;
+    height: 150px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    transition: transform 0.3s ease;
+    border-radius: 8px;
+    background-color: #f5f5f5;
 }
-
-    .perk-image:hover {
-        transform: scale(1.05);
-        cursor: pointer;
-    }
 
 .perk-title {
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: 600;
+    margin: 0.5rem 0;
+    color: #333;
 }
 
-.perk-btn-primary {
-    color: white;
-    background-color: #AF0D18;
-    border-width: 2px;
-    font-weight: 500;
+.perks-control .btn {
     border-radius: 20px;
-    padding: 0.375rem 1.5rem;
+    padding: 0.375rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: #AF0D18;
 }
+
+.perks-banner h2 {
+    font-size: 2rem;
+    color: #E4C9AB;
+}
+
+.btn-group .btn {
+    transition: all 0.2s ease-in-out;
+}
+
+    .btn-group .btn:hover {
+        transform: scale(1.05);
+    }
+
+#add-perk-btn {
+    transition: 0.2s ease-in-out;
+}
+
+    #add-perk-btn:hover {
+        transform: translateY(-1px);
+    }
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -244,48 +332,93 @@ footer {
 }*/
 
 .perk-detail-container {
-    max-width: 900px;
+    max-width: 850px;
     margin: 2rem auto;
 }
 
 .perk-header {
     background-color: #AF0D18;
-    color: #E4C9AB;
-}
-
-.perk-detail-card {
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #fff;
+    color: #fff;
+    border-bottom: 3px solid #8b0b13;
+    height: 60px;
+    position: relative;
 }
 
 .perk-detail-image {
     width: 100%;
-    min-height: 250px;
-    background-size: cover;
-    background-position: center;
+    height: 300px; 
+    background-size: contain;
     background-repeat: no-repeat;
-    display: block;
+    background-position: center;
+    background-color: #f8f9fa; 
 }
 
+
 .perk-detail-title {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 1rem;
+    font-size: 1.75rem;
 }
 
 .perk-detail-text {
     text-align: justify;
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.8;
 }
 
+
+.modal-content {
+    border-radius: 1rem;
+}
+
+.modal-header, .modal-footer {
+    border: none;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    align-items: center;
+}
 
 @@media (max-width: 768px) {
     .perk-detail-image {
-        min-height: 200px;
+        height: 200px;
     }
 }
+
+.search-bar {
+    max-width: 300px;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    border: 3px solid #ccc;
+    transition: all 0.2s ease-in-out;
+}
+
+    .search-bar:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+
+.fab-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+    .fab-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    }
+
+
+
+
 
 /*About Us*/
 
@@ -317,7 +450,7 @@ footer {
 }
 
 
-.alumni-profile-image {
+/*.alumni-profile-image {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -326,5 +459,46 @@ footer {
     height: 120px;
     margin-left: auto;
     margin-right: auto;
-    /*width: 50%;*/
+}*/
+
+.alumni-profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #E4C9AB;
+}
+
+
+/*CHANGE PIN ---- kbejar 7/4/25 */
+
+.pin-box-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pin-box {
+    width: 60px;
+    height: 70px;
+    font-size: 2rem;
+    text-align: center;
+    border: 2px solid #ced4da;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fff;
+}
+
+    .pin-box:focus {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        outline: none;
+    }
+
+@media (max-width: 576px) {
+    .pin-box {
+        width: 50px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
 }

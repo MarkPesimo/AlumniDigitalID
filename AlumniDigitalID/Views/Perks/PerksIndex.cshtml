@@ -10,66 +10,71 @@
     <script src="~/Scripts/Perks/Perks.js"></script>
 }
 
-<div class="container">
-    <div class="perks-banner text-center mb-4">
-        <h2 class="mt-4 mb-4">Perks & Benefits</h2>
-    </div>
+    <div class="container">
+        <div class="perks-banner text-center mb-4">
+            <h2 class="mt-4 mb-4">PERKS & BENEFITS</h2>
+        </div>
 
-    <div class="row mb-2">
-        <div class="col-4"><button class="btn btn-sm btn-danger" id="add-perk-btn"><i class="bi bi-plus-lg"></i> Add Perk</button></div>
-        <div class="col-8"></div>
-    </div>
+        @*<button class="fab-button btn btn-danger btn-sm d-flex align-items-center gap-1" id="add-perk-btn">
+            <i class="bi bi-plus-lg"></i> Add Perk
+        </button>*@
 
-    <div class="row">
-        <table class="table table-sm" id="perks-table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Perks Title</th>
-                    <th scope="col">Created by</th>
-                    @*<th scope="col">Date Created</th>*@
-                    <th scope="col">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <!-- Add Perk Floating Button -->
+            <button class="fab-button btn btn-success btn-lg rounded-circle ms-3" id="add-perk-btn" title="Add Perk">
+                <i class="bi bi-plus-lg"></i>
+            </button>
 
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var perk in Model)
-                {
+            @*<button class="fab-button btn btn-danger btn-sm d-flex align-items-center gap-1" id="add-perk-btn">
+                <i class="bi bi-plus-lg"></i> Add Perk
+            </button>*@
+
+            <!-- Search Bar -->
+            <input type="text" id="perk-search" class="form-control search-bar" placeholder="Search perks...">
+        </div>
+
+
+
+        <div class="row">
+            <table class="table table-striped" id="perks-table">
+                <thead class="thead-light">
                     <tr>
-                        <td>@perk.Title</td>
-                        <td>
-                            <div>
-                                @perk.CreatedBy <br />
-                                @perk.DateCreated.ToShortDateString()
-                            </div>
-                            
-                        </td>
-                        @*<td></td>*@
+                        <th scope="col">Perks Title</th>
+                        <th scope="col">Created by</th>
+                        @*<th scope="col">Date Created</th>*@
+                        <th scope="col">
 
-                        @*
-                            <td><p style="font-size: 10px">@perk.Title</p></td>
-                            <td><p style="font-size: 10px">@perk.CreatedBy</p></td>
-                            <td><p style="font-size: 10px">@perk.DateCreated</p></td>
-                        *@
-
-                        <td>
-                            <div>
-                                <button class="btn btn-sm btn-secondary edit-perk-btn" guid="@perk.Guid"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-success activate-perk-btn" @perk.ActivateProp guid="@perk.Guid"><i class="bi bi-check-circle"></i></button>
-                                <button class="btn btn-sm btn-danger deactivate-perk-btn" @perk.DeactivateProp guid="@perk.Guid"><i class="bi bi-x-circle"></i></button>
-                            </div>
-                        </td>
+                        </th>
                     </tr>
+                </thead>
+                <tbody>
+                    @foreach (var perk in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@perk.Title</td>
+                            <td>
+                                <small class="text-muted">@perk.CreatedBy</small><br />
+                                <small class="text-muted">@perk.DateCreated.ToShortDateString()</small>
+                            </td>
+
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button class="btn btn-sm btn-secondary edit-perk-btn" guid="@perk.Guid"><i class="bi bi-pencil-square"></i></button>
+                                    <button class="btn btn-sm btn-danger activate-perk-btn" @perk.ActivateProp guid="@perk.Guid"><i class="bi bi-x-circle"></i></button>
+                                    <button class="btn btn-sm btn-success deactivate-perk-btn" @perk.DeactivateProp guid="@perk.Guid"><i class="bi bi-check-circle"></i></button>
+                                </div>
+                            </td>
+                        </tr>
 
 
-                }
+                    }
 
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
+        </div>
     </div>
-</div>
 
 @Html.Partial("~/Views/Perks/Modal/_add_perks_modal.cshtml")
 @Html.Partial("~/Views/Perks/Modal/_edit_perks_modal.cshtml")

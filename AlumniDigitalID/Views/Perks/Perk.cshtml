@@ -10,29 +10,28 @@
 
 
 <div class="container perk-detail-container">
-    <div class="perk-detail-banner mb-0">
-        <div class="perk-header">
-            <div class="row align-items-center">
-                <div class="col-auto">
-                    <a href="@Url.Action("Perks", "Perks")" class="btn btn-primary">
-                        <i class="bi bi-arrow-left"></i>
-                    </a>
-                </div>
-                <div class="col text-center">
-                    <h4 class="mb-0">PERKS & BENEFITS</h4>
-                </div>
-            </div>
+    <!-- Header Banner -->
+    <div class="perk-detail-banner mb-4 shadow-sm rounded-4 overflow-hidden">
+        <div class="perk-header d-flex align-items-center px-3 py-2">
+            <a href="@Url.Action("Perks", "Perks")" class="btn btn-light me-3 rounded-circle shadow-sm" title="Back">
+                <i class="bi bi-arrow-left fs-5 text-dark"></i>
+            </a>
+            <h4 class="mb-0 text-white flex-grow-1 text-center">PERKS & BENEFITS</h4>
         </div>
-        <div class="perk-detail-image" style="background-image:url('../PerksAttachment/@Model.Id@Model.FileType')"></div>
+
+        <!-- Image Section -->
+        <div class="perk-detail-image" style="background-image:url('../PerksAttachment/@Model.Id@Model.FileType');"></div>
     </div>
 
-    <div class="perk-detail-card bg-white p-4">
+    <!-- Perk Card -->
+    <div class="perk-detail-card bg-white shadow rounded-4 p-4 mb-5">
         <div class="perk-detail-body">
-            <h3 class="perk-detail-title">@Model.Title</h3>
-            <p class="perk-detail-text">@Model.Description</p>
+            <h2 class="perk-detail-title text-center text-primary fw-bold mb-3">@Model.Title</h2>
+            <p class="perk-detail-text text-secondary">@Model.Description</p>
         </div>
     </div>
 </div>
+
 
 
 <!--

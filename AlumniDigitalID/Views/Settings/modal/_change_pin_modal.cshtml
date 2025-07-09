@@ -1,5 +1,4 @@
-﻿
-<div class="modal fade" id="change_pin_modal" tabindex="-1" aria-labelledby="jobOrderLabel" aria-hidden="true">
+﻿<div class="modal fade" id="change_pin_modal" tabindex="-1" aria-labelledby="jobOrderLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header Zips-modal-header">
@@ -7,8 +6,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
-
+            <div class="modal-body text-center">
+                <form id="change-pin-form">
+                    <label for="pin1" class="form-label mb-3">Enter 4-digit PIN</label>
+                    <div class="pin-box-container d-flex justify-content-center gap-3">
+                        <input type="number" class="pin-box" name="pin1" maxlength="1" inputmode="numeric" />
+                        <input type="number" class="pin-box" name="pin2" maxlength="1" inputmode="numeric" />
+                        <input type="number" class="pin-box" name="pin3" maxlength="1" inputmode="numeric" />
+                        <input type="number" class="pin-box" name="pin4" maxlength="1" inputmode="numeric" />
+                    </div>
+                    <input type="hidden" name="NewPIN" id="full-pin" />
+                    <div class="form-text mt-3">Use 4 digits only</div>
+                </form>
             </div>
 
             <div class="modal-footer">
@@ -19,4 +28,3 @@
         </div>
     </div>
 </div>
-

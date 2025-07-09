@@ -10,24 +10,27 @@
 
 
     <div class="container">
-        <div class="profile-banner text-center mb-4">
-            <div class="row">
-                <div class="col-sm-1">
+
+        @*kabejar 7/2/2025*@
+        @*start*@
+        <div class="profile-banner mb-4">
+            <div class="row d-flex align-items-center">
+                <div class="col-auto">
                     <img src="~/AlumniImages/@(Model.Guid).JPEG"
                          class="alumni-profile-image"
                          id="alumni-profile-image"
                          alt="Responsive image"
-                         onerror="this.src='/AlumniImages/0.JPEG'" />
+                         onerror="this.src='/AlumniImages/0.JPEG'"
+                         style="cursor: pointer;" />
                 </div>
-                <div class="col-sm-11">
-                    <h3 class="mt-3 text-white"><b>@Model.Firstname.ToUpper() @Model.Middlename.ToUpper() @Model.Lastname.ToUpper()</b></h3>
+                <div class="col d-flex justify-content-center">
+                    <h3 class="mb-0 text-white text-center">
+                        <b>@Model.Firstname.ToUpper() @Model.Middlename.ToUpper() @Model.Lastname.ToUpper()</b>
+                    </h3>
                 </div>
             </div>
-
-            @*<div class="text-right">
-                <a href="#" class="btn btn-link">EDIT PROFILE ▶</a>
-            </div>*@
         </div>
+        @*end*@
 
 
         @using (Html.BeginForm("Add", "Overtime", FormMethod.Post, new { enctype = "multipart/form-data", name = "alumni-profile-update", id = "alumni-profile-update" }))
@@ -52,14 +55,14 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.AlumniNo, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.AlumniNo, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.AlumniNo, new { @class = "form-control bg-secondary text-center text-white", @readonly = "readonly" })
                     </div>
                 </div>
 
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.MemberType, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.MemberType, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.MemberType, new { @class = "form-control bg-secondary text-center text-white", @readonly = "readonly" })
                     </div>
                 </div>
@@ -70,13 +73,13 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Firstname, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.Firstname, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.Firstname, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Lastname, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.Lastname, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.Lastname, new { @class = "form-control" })
                     </div>
                 </div>
@@ -86,7 +89,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Middlename, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.Middlename, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.Middlename, new { @class = "form-control" })
                     </div>
                 </div>
@@ -98,13 +101,13 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Gender, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.Gender, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.DropDownListFor(m => m.Gender, (IEnumerable<SelectListItem>)ViewBag._Gender, new { @class = "form-select", })
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.CivilStatus, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.CivilStatus, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.DropDownListFor(m => m.CivilStatus, (IEnumerable<SelectListItem>)ViewBag._CivilStatus, new { @class = "form-select", })
                     </div>
                 </div>
@@ -113,7 +116,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Birthday, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.Birthday, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @type = "date", @Value = Model.Birthday.ToString("yyyy-MM-dd") })
                     </div>
                 </div>
@@ -122,13 +125,13 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.EmailAddress, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.EmailAddress, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.MobileNo, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.MobileNo, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
                     </div>
                 </div>
@@ -139,7 +142,7 @@
             <div class="row mt-2">
                 <div class="col">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Address, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.Address, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextAreaFor(m => m.Address, 4, 40, new { @class = "form-control" })@*, @placeholder = "Description" })*@
                     </div>
 
@@ -150,14 +153,14 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.YearGraduated, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.YearGraduated, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.YearGraduated, new { @class = "form-control" })
                     </div>
                 </div>
 
                 <div class="col-6">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SectionName, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.SectionName, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
                     </div>
                 </div>
@@ -168,7 +171,7 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.CourseId, new { @class = "font-weight-bold" })
+                        @Html.LabelFor(m => m.CourseId, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
                         @Html.DropDownListFor(m => m.CourseId, (IEnumerable<SelectListItem>)ViewBag._Courses, new { @class = "form-select", })
                     </div>
                 </div>
@@ -177,7 +180,7 @@
             <hr style="border-bottom: solid; border-color: #000;">
 
             <div class="row mt-4">
-                <div class="col-md-12 text-right">
+                <div class="col-md-12 text-right profile-btn">
                     <button type="button" class="btn btn-danger" id="submit-update-button">SAVE CHANGES</button>
                     <button type="button" class="btn btn-outline-secondary mr-2" id="cancel-update-button">CANCEL</button>
 

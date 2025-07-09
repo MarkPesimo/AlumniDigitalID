@@ -1,22 +1,52 @@
-﻿
-<div class="modal fade" id="add_perks_modal" tabindex="-1" aria-labelledby="jobOrderLabel" aria-hidden="true">
+﻿@*<div class="modal fade" id="add_perks_modal" tabindex="-1" aria-labelledby="jobOrderLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="jobOrderLabel">Add Perks</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="add-perks-button">
+                        <i class="fa-regular fa-circle-check"></i> Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="modal fade" id="add_perks_modal" tabindex="-1" aria-labelledby="addPerkLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="jobOrderLabel">Add Perks</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content shadow-lg rounded-4 border-0">
+
+            <!-- Header -->
+            <div class="modal-header bg-success text-white rounded-top-4">
+                <h5 class="modal-title fw-semibold" id="addPerkLabel">
+                    <i class="fas fa-gift me-2"></i> Add Perk
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
+            <!-- Body -->
+            <div class="modal-body px-4 py-3">
+                <p class="text-muted mb-3">Fill out the form below to add a new perk.</p>
 
+                
             </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="add-perks-button">
-                    <i class="fa-regular fa-circle-check"></i> Save
+            <!-- Footer -->
+            <div class="modal-footer bg-light rounded-bottom-4 px-4 py-3">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-success" id="add-perks-button">
+                    <i class="fas fa-check-circle me-1"></i> Save
                 </button>
             </div>
         </div>
     </div>
 </div>
-
