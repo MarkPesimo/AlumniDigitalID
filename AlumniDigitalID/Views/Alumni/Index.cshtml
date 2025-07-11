@@ -13,7 +13,7 @@
 <div class="container py-4 mt-2" style="max-width: 480px; margin: 0 auto; background-color: #fff;">
     <div class="card id-card mt-4 position-relative" style="background-image:url('../Content/Images/Card/@Model.AlumniMemberCard')">
         <div class="card-body text-center">
-            <h5 class="id-name fw-bold mb-1">@Model.Firstname @Model.Middlename.Substring(0, 1). @Model.Lastname </h5>
+            <h5 class="id-name fw-bold mb-1">@Model.Firstname @Model.Lastname </h5>
             <div class="id-course">@Model.CourseName</div>
             <div class="id-batch mb-3">Batch @Model.YearGraduated</div>
         </div>
@@ -23,7 +23,7 @@
             <div class="id-alumNumber">@Model.AlumniNo</div>
             <div class="id-footer">
                 <div class="id-membership">@Model.MemberType</div>
-                <div class="id-expiry">Expiry: @Model.MembershipExpiration</div>
+                <div class="id-expiry">Exp: @Model.MembershipExpiration</div>
             </div>
         </div>
     </div>
