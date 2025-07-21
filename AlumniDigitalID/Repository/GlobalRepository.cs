@@ -1,4 +1,5 @@
 ﻿using AlumniDigitalID;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -138,6 +139,34 @@ namespace Alumni.Repository
             return _errors;
         }
 
+        public List<Year_model> GetYears()
+        {
+            try
+            {
+                List<Year_model> _obj = new List<Year_model>();
+                string _endpoint = "Alumni/GetYears";
+                HttpResponseMessage _response = GenerateGetRequest(_endpoint);
+                if (_response.IsSuccessStatusCode)
+                {
+                    var _value = _response.Content.ReadAsStringAsync().Result.ToString();
+                    _obj = JsonConvert.DeserializeObject<List<Year_model>>(_value);
+                }
+
+                return _obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<Membertype_model> GetMemberType()
+        {
+            return new List<Membertype_model>() {
+                new Membertype_model(){ Description="Lifetime Member",Value="Lifetime Member" },
+                new Membertype_model(){ Description="Annual Member",Value="Annual Member" }
+            };
+        }
 
         public IEnumerable<Gender_model> GetGender()
         {

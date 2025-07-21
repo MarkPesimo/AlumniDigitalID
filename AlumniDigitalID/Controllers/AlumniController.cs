@@ -185,6 +185,64 @@ namespace AlumniDigitalID.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult _Add()
+        {
+            try
+            {
+                Profile_model _model = new Profile_model();
+                _model.Id = 0;
+                _model.UserId = _loginuserid;
+                _model.Guid = "0";
+                _model.MembershipExpiration = DateTime.Now.AddYears(1).ToString();
+                _model.AlumniGroupId = _alumnigroupid;
+                _model.YearGraduated = DateTime.Now.Year;
+                _model.SectionName = "-";
+                _model.Birthday = DateTime.Now;
+                _model.MemberType = "Annual Member";
+                _model.Nationality = "Filipino";
+                _model.SchoolId = _schoolid;
+                _model.SchoolName = "School Name";
+                _model.CourseName = "Course Name";
+                _model.UserType = "User";
+
+                ViewBag._MemberType = _globalrepository.GetMemberType().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
+                ViewBag._Years = _globalrepository.GetYears().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
+                ViewBag._Gender = _globalrepository.GetGender().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
+                ViewBag._CivilStatus = _globalrepository.GetCivilStatus().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
+                ViewBag._Courses = _courserepository.GetSchoolCourses(_schoolid, _alumnigroupid).Select(t => new SelectListItem { Text = t.CourseName, Value = t.Id.ToString() }).ToList();
+
+
+                return PartialView("~/Views/Alumni/partial/_add.cshtml", _model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult _Add(Profile_model _model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int _id = _alumnirepository.Create(_model);
+
+                    return Json(new { Result = "Success", Id = _id });
+                }
+
+                List<string> _errors = _globalrepository.GetModelErrors(ModelState);
+                return Json(new { Result = "ERROR", Message = _errors[1], ElementName = _errors[0] });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
 
         [HttpGet]
         public ActionResult Edit(string _guid)
@@ -193,9 +251,9 @@ namespace AlumniDigitalID.Controllers
             {
                 Profile_model _model = _alumnirepository.GetProfileByGuid(_guid);
                 ViewBag._Gender = _globalrepository.GetGender().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
+                ViewBag._Years = _globalrepository.GetYears().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
                 ViewBag._CivilStatus = _globalrepository.GetCivilStatus().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
                 ViewBag._Courses = _courserepository.GetSchoolCourses(_schoolid, _alumnigroupid).Select(t => new SelectListItem { Text = t.CourseName, Value = t.Id.ToString() }).ToList();
-
                 
                 return PartialView("~/Views/Alumni/partial/_edit.cshtml", _model);
             }
@@ -235,6 +293,7 @@ namespace AlumniDigitalID.Controllers
             {
                 Profile_model _model = _alumnirepository.GetProfileByGuid(_guid);
                 ViewBag._Gender = _globalrepository.GetGender().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
+                ViewBag._Years = _globalrepository.GetYears().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
                 ViewBag._CivilStatus = _globalrepository.GetCivilStatus().Select(t => new SelectListItem { Text = t.Description, Value = t.Value.ToString() }).ToList();
                 ViewBag._Courses = _courserepository.GetSchoolCourses(_schoolid, _alumnigroupid).Select(t => new SelectListItem { Text = t.CourseName, Value = t.Id.ToString() }).ToList();
 
@@ -314,6 +373,9 @@ namespace AlumniDigitalID.Controllers
 
 
         //================= BEGIN MISC=================================
+        
+
+
         [HttpGet]
         public ActionResult AboutIndex()
         {

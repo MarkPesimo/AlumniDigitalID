@@ -11,16 +11,15 @@
                      class="alumni-profile-image"
                      id="alumni-profile-image"
                      alt="Responsive image"
-                     onerror="this.src='/AlumniImages/0.JPEG'"/>
+                     onerror="this.src='/AlumniImages/0.JPEG'" />
             </div>
 
-         
+
         </div>
     </div>
 
 
-
-    @using (Html.BeginForm("Add", "Overtime", FormMethod.Post, new { enctype = "multipart/form-data", name = "edit-member-form", id = "edit-member-form" }))
+    @using (Html.BeginForm("Add", "Overtime", FormMethod.Post, new { enctype = "multipart/form-data", name = "add-member-form", id = "add-member-form" }))
     {
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.SchoolId)
@@ -50,7 +49,7 @@
             <div class="col-6">
                 <div class="form-group">
                     @Html.LabelFor(m => m.MemberType, new { @class = "font-weight-bold" })
-                    @Html.TextBoxFor(m => m.MemberType, new { @class = "form-control bg-secondary text-center text-white", @readonly = "readonly" })
+                    @Html.DropDownListFor(m => m.MemberType, (IEnumerable<SelectListItem>)ViewBag._MemberType, new { @class = "form-select", })
                 </div>
             </div>
         </div>

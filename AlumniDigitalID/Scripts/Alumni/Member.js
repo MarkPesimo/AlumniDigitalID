@@ -21,9 +21,24 @@
         //    }
         //});
 
-        new DataTable('#members-table');
+        //new DataTable('#members-table');
+
+        //$('.dt-length').addClass('d-none');
+
+
+        new DataTable('#members-table', {
+            searching: false
+        });
 
         $('.dt-length').addClass('d-none');
+
+        //  Custom search functionality ---- kbejar  7/3/25 ----
+        $('#member-search').on('keyup', function () {
+            const value = $(this).val().toLowerCase();
+            $('#members-table tbody tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
     });
 
     //===============================================BEGIN EDIT==================================================================================
@@ -147,6 +162,57 @@
         });
     });
     //===============================================END DEACTIVATE==================================================================================
+
+    //===============================================BEGIN ADD==================================================================================
+    $("#add-member-btn").click(function (e) {
+        ShowLoading('SHOW');
+        $.ajax({
+            type: "GET",
+            url: '/Alumni/_Add',
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+
+                $('#add_member_modal').find(".modal-body").innerHTML = '';
+                $('#add_member_modal').find(".modal-body").html(response);
+                $("#add_member_modal").modal('show');
+                ShowLoading('HIDE');
+            },
+            failure: function (response) { LogError(response); },
+            error: function (response) { LogError(response); }
+        });
+    });
+
+    $('#add_member_modal').on('click', '#add-members-button', function (e) {
+        //$file = $("#add_perks_Attachment");
+        //var $filepath = $.trim($file.val());
+        //if ($filepath == "") {
+        //    ShowWarningMessage('Please select a file, Attachment is required.')
+        //    return;
+        //}
+
+
+        ShowLoading('SHOW');
+        $.ajax({
+            url: '/Alumni/_Add',
+            type: "POST",
+            data: $('#add-member-form').serialize(),
+            dataType: 'json',
+            success: function (result) {
+                if (result.Result == "ERROR") { ValidationError(result); }
+                else {
+                    $("#add_member_modal").modal('hide');
+                     
+                    ShowSuccessMessage('Alumni member successfully created.');
+
+                    //window.location.href = "/Perks/PerksIndex";
+                }
+            },
+            failure: function (response) { LogError(response); },
+            error: function (response) { LogError(response); }
+        });
+    });
+    //===============================================END ADD==================================================================================
 
 
     function ShowLoading(show) {

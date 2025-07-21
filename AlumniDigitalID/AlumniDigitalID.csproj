@@ -152,8 +152,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="ZMGModel">
-      <HintPath>..\..\..\ZMG API\ZMG-api\ZMGModel\ZMGModel\bin\Debug\ZMGModel.dll</HintPath>
+    <Reference Include="ZMGModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Source Code\ZIPSapi\ZMGModel\ZMGModel\bin\Debug\ZMGModel.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -311,6 +312,8 @@
     <Content Include="Views\Alumni\partial\_activate_member.cshtml" />
     <Content Include="Views\Alumni\modal\_edit_member_modal.cshtml" />
     <Content Include="Views\Alumni\partial\_edit.cshtml" />
+    <Content Include="Views\Alumni\modal\_add_member_modal.cshtml" />
+    <Content Include="Views\Alumni\partial\_add.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

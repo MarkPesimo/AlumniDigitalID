@@ -14,10 +14,25 @@
         <h2 class="mt-4 mb-4">Members</h2>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-4"><button class="btn btn-sm btn-danger" id="add-perk-btn"><i class="bi bi-plus-lg"></i> Add Members</button></div>
-        <div class="col-8"></div>
+    @*<div class="row mb-2">
+            <div class="col-4"><button class="btn btn-sm btn-danger" id="add-perk-btn"><i class="bi bi-plus-lg"></i> Add Members</button></div>
+            <div class="col-8"></div>
+        </div>*@
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Add Perk Floating Button -->
+        <button class="fab-button btn btn-success btn-lg rounded-circle ms-3" id="add-member-btn" title="Add Member">
+            <i class="bi bi-plus-lg"></i>
+        </button>
+
+        @*<button class="fab-button btn btn-danger btn-sm d-flex align-items-center gap-1" id="add-perk-btn">
+                <i class="bi bi-plus-lg"></i> Add Perk
+            </button>*@
+
+        <!-- Search Bar -->
+        <input type="text" id="member-search" class="form-control search-bar" placeholder="Search member...">
     </div>
+
 
     <div class="row">
         <table class="table table-sm" id="members-table">
@@ -52,8 +67,8 @@
                             </div>
                         </td>
 
-                        <td>
-                            <div>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group">
                                 @*<a href="@Url.Action("AdminUpdate", "Alumni", new { _selected_guid = member.Guid})" class="btn btn-sm btn-secondary"> <i class="bi bi-pencil-square"></i></a>*@
 
                                 <button class="btn btn-sm btn-secondary edit-member-btn" @member.Edit_prop guid="@member.Guid"><i class="bi bi-pencil-square"></i></button>
@@ -68,6 +83,7 @@
     </div>
 </div>
 
+@Html.Partial("~/Views/Alumni/modal/_add_member_modal.cshtml")
 @Html.Partial("~/Views/Alumni/modal/_edit_member_modal.cshtml")
 @Html.Partial("~/Views/Alumni/modal/_activate_member_modal.cshtml")
 @Html.Partial("~/Views/Alumni/modal/_deactivate_member_modal.cshtml")
