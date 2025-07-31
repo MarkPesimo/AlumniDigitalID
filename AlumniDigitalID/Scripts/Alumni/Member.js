@@ -190,7 +190,12 @@
         //    ShowWarningMessage('Please select a file, Attachment is required.')
         //    return;
         //}
-
+        let $file = $("#Alumni_Attachment");
+        let filepath = $.trim($file.val());
+        if (filepath === "") {
+            ShowWarningMessage('Please select a image/picture, Attachment is required.');
+            return;
+        }
 
         ShowLoading('SHOW');
         $.ajax({
@@ -202,12 +207,30 @@
                 if (result.Result == "ERROR") { ValidationError(result); }
                 else {
                     $("#add_member_modal").modal('hide');
-                     
-                    ShowSuccessMessage('Alumni member successfully created.');
 
-                    //window.location.href = "/Perks/PerksIndex";
+                    let formData = new FormData();
+                    let _attachment = $file[0].files[0];
+                    formData.append('Attachment', _attachment);
+                    formData.append('_addguid', result.Guid)
+
+                    ShowLoading('SHOW');
+                    $.ajax({
+                        url: '/Alumni/_AddAttachment',
+                        type: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            if (result.Result == "ERROR") { ValidationError(result); }
+                            else {
+                                ShowSuccessMessage('Alumni member successfully created.');
+                            }
+                        },
+                        failure: function (response) { LogError(response); },
+                        error: function (response) { LogError(response); }
+                    });
                 }
-            },
+            },            
             failure: function (response) { LogError(response); },
             error: function (response) { LogError(response); }
         });

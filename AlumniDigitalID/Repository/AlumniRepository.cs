@@ -20,6 +20,8 @@ namespace Alumni.Repository
             if (_globalrepository == null) { _globalrepository = new GlobalRepository(); }
         }
 
+ 
+
         public Profile_model GetProfile(int _id)
         {
             try
@@ -62,9 +64,9 @@ namespace Alumni.Repository
             }
         }
 
-        public int Create(Profile_model _model)
+        public string Create(Profile_model _model)
         {
-            int _id = 0;
+            string _guid = "";
             string _endpoint = "Alumni/Create";
 
 
@@ -107,10 +109,10 @@ namespace Alumni.Repository
             if (_response.IsSuccessStatusCode)
             {
                 var _value = _response.Content.ReadAsStringAsync().Result.ToString();
-                _id = int.Parse(_value);
+                _guid = JsonConvert.DeserializeObject<string>(_value); 
             }
 
-            return _id;
+            return _guid;
         }
 
 

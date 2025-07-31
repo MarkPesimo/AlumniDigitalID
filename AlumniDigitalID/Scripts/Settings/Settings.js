@@ -3,7 +3,87 @@
         ShowLoading('HIDE');
     });
 
-    // Open Change PIN modal via AJAX
+    $("#change_username_btn").click(function (e) {
+        e.preventDefault();
+
+        ShowLoading('SHOW');
+        $.ajax({
+            type: "GET",
+            url: '/Settings/ChangeUsername',
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                ShowLoading('HIDE');
+                $('#change_username_modal').find(".modal-body").html(response);
+                $("#change_username_modal").modal('show');
+            },
+            failure: function (response) { LogError(response); },
+            error: function (response) { LogError(response); }
+        });
+    });
+
+    $('#change_username_modal').on('click', '#save-username-button', function () {
+
+        ShowLoading('SHOW');
+        $.ajax({
+            url: '/Settings/Update',
+            type: "POST",
+            data: $('#change-username-form').serialize(),
+            dataType: 'json',
+            success: function (result) {
+                //console.log(result);
+                if (result.Result == "ERROR") { ValidationError(result); }
+                else {
+                    //$("#change_username_modal").modal('hide');
+
+                    //ShowLoading('HIDE');
+                    //ShowSuccessMessage('Username successfully updated.');
+                    window.location.href = "/Home/Success";
+                }
+            }
+        });
+    });
+
+    $("#change_password_btn").click(function (e) {
+        e.preventDefault();
+
+        ShowLoading('SHOW');
+        $.ajax({
+            type: "GET",
+            url: '/Settings/ChangePassword',
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                ShowLoading('HIDE');
+                $('#change_password_modal').find(".modal-body").innerHTML = '';
+                $('#change_password_modal').find(".modal-body").html(response);
+                $("#change_password_modal").modal('show');
+
+            },
+            failure: function (response) { LogError(response); },
+            error: function (response) { LogError(response); }
+        });
+    });
+
+    $('#change_password_modal').on('click', '#save-password-button', function () {
+        ShowLoading('SHOW');
+        $.ajax({
+            url: '/Settings/Update',
+            type: "POST",
+            data: $('#change-password-form').serialize(),
+            dataType: 'json',
+            success: function (result) {
+                if (result.Result == "ERROR") { ValidationError(result); }
+                else {
+                    $("#change_password_modal").modal('hide');
+
+                    ShowLoading('HIDE');
+                    ShowSuccessMessage('Password successfully updated.');
+                }
+            }
+        });
+    });
+
     $("#change_pin_btn").click(function (e) {
         e.preventDefault();
 
@@ -15,6 +95,7 @@
             dataType: "html",
             success: function (response) {
                 ShowLoading('HIDE');
+                $('#change_pin_modal').find(".modal-body").innerHTML = '';
                 $('#change_pin_modal').find(".modal-body").html(response);
                 $("#change_pin_modal").modal('show');
             },
@@ -23,43 +104,83 @@
         });
     });
 
-    // Save PIN handler
     $('#change_pin_modal').on('click', '#save-pin-button', function () {
         ShowLoading('SHOW');
-
-        const pin1 = $('input[name="pin1"]').val();
-        const pin2 = $('input[name="pin2"]').val();
-        const pin3 = $('input[name="pin3"]').val();
-        const pin4 = $('input[name="pin4"]').val();
-        const fullPin = `${pin1}${pin2}${pin3}${pin4}`;
-
-        if (!/^\d{4}$/.test(fullPin)) {
-            ShowLoading('HIDE');
-            alert("Please enter a valid 4-digit numeric PIN.");
-            return;
-        }
-
-        $('#full-pin').val(fullPin); // Assign to hidden input before submit
-
         $.ajax({
             url: '/Settings/Update',
             type: "POST",
             data: $('#change-pin-form').serialize(),
             dataType: 'json',
             success: function (result) {
-                if (result.Result === "ERROR") {
-                    ValidationError(result);
-                } else {
+                if (result.Result == "ERROR") { ValidationError(result); }
+                else {
                     $("#change_pin_modal").modal('hide');
+
                     ShowLoading('HIDE');
                     ShowSuccessMessage('PIN number successfully updated.');
                 }
-            },
-            error: function (response) {
-                LogError(response);
             }
         });
     });
+
+
+    //// Open Change PIN modal via AJAX
+    //$("#change_pin_btn").click(function (e) {
+    //    e.preventDefault();
+
+    //    ShowLoading('SHOW');
+    //    $.ajax({
+    //        type: "GET",
+    //        url: '/Settings/ChangePIN',
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "html",
+    //        success: function (response) {
+    //            ShowLoading('HIDE');
+    //            $('#change_pin_modal').find(".modal-body").html(response);
+    //            $("#change_pin_modal").modal('show');
+    //        },
+    //        failure: function (response) { LogError(response); },
+    //        error: function (response) { LogError(response); }
+    //    });
+    //});
+
+    //// Save PIN handler
+    //$('#change_pin_modal').on('click', '#save-pin-button', function () {
+    //    ShowLoading('SHOW');
+
+    //    const pin1 = $('input[name="pin1"]').val();
+    //    const pin2 = $('input[name="pin2"]').val();
+    //    const pin3 = $('input[name="pin3"]').val();
+    //    const pin4 = $('input[name="pin4"]').val();
+    //    const fullPin = `${pin1}${pin2}${pin3}${pin4}`;
+
+    //    if (!/^\d{4}$/.test(fullPin)) {
+    //        ShowLoading('HIDE');
+    //        alert("Please enter a valid 4-digit numeric PIN.");
+    //        return;
+    //    }
+
+    //    $('#full-pin').val(fullPin); // Assign to hidden input before submit
+
+    //    $.ajax({
+    //        url: '/Settings/Update',
+    //        type: "POST",
+    //        data: $('#change-pin-form').serialize(),
+    //        dataType: 'json',
+    //        success: function (result) {
+    //            if (result.Result === "ERROR") {
+    //                ValidationError(result);
+    //            } else {
+    //                $("#change_pin_modal").modal('hide');
+    //                ShowLoading('HIDE');
+    //                ShowSuccessMessage('PIN number successfully updated.');
+    //            }
+    //        },
+    //        error: function (response) {
+    //            LogError(response);
+    //        }
+    //    });
+    //});
 
     // Auto-tab and restrict to single digit input
     $(document).on('input', '.pin-box', function () {

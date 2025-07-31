@@ -229,13 +229,33 @@ namespace AlumniDigitalID.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    int _id = _alumnirepository.Create(_model);
+                    string _guid = _alumnirepository.Create(_model);
 
-                    return Json(new { Result = "Success", Id = _id });
+                    return Json(new { Result = "Success", Guid = _guid });
                 }
 
                 List<string> _errors = _globalrepository.GetModelErrors(ModelState);
                 return Json(new { Result = "ERROR", Message = _errors[1], ElementName = _errors[0] });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult _AddAttachment(HttpPostedFileBase Attachment, string _addguid)
+        {
+            try
+            {
+                string _fileextension = _globalrepository.GetExtension(Attachment);
+                var path = Path.Combine(Server.MapPath("~/AlumniImages/" + _addguid.ToString() + ".JPEG"));
+
+                if (System.IO.File.Exists(path)) { System.IO.File.Delete(path); }
+
+                Attachment.SaveAs(path);
+
+                return Json(new { Result = "Success", _guid = _guid });
             }
             catch (Exception ex)
             {
