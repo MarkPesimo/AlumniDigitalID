@@ -392,8 +392,35 @@ namespace AlumniDigitalID.Controllers
         }
 
 
+        // kbejar Search
+        [HttpPost]
+        public ActionResult SearchMembers(string searchTerm)
+        {
+            try
+            {
+                List<Members_model> members = _alumnirepository.GetMembers(_alumnigroupid);
+
+                // Apply search filter if search term exists
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    members = members.Where(m =>
+                        m.MembersName.ToLower().Contains(searchTerm.ToLower()) ||
+                        m.Course.ToLower().Contains(searchTerm.ToLower()) ||
+                        m.Batch.ToLower().Contains(searchTerm.ToLower()) ||
+                        m.MemberType.ToLower().Contains(searchTerm.ToLower())
+                    ).ToList();
+                }
+
+                return Json(new { data = members });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
         //================= BEGIN MISC=================================
-        
+
 
 
         [HttpGet]

@@ -1,43 +1,69 @@
 ﻿$(function () {
     $(document).ready(function () {
-        //new DataTable('#perks-table', {
-        //    layout: {
-        //        topStart: {
-        //            buttons: [
-        //                {
-        //                    text: 'Add new button',
-        //                    action: function (e, dt, node, config) {
-        //                        dt.button().add(1, {
-        //                            text: 'Button ' + counter++,
-        //                            action: function () {
-        //                                //this.remove();
-        //                                alert('clicked');
-        //                            }
-        //                        });
-        //                    }
-        //                }
-        //            ]
-        //        }
-        //    }
-        //});
+        // Initialize DataTable with search functionality
+        var table = $('#members-table').DataTable({
+            dom: '<"top"l>rt<"bottom"ip>',
+            processing: true,
+            serverSide: false,
+            searching: true,
+            lengthChange: false,
+            //columns: [
+            //    {
+            //        data: null,
+            //        render: function (data, type, row) {
+            //            // Member information display with image
+            //            return `
+            //            <div class="row">
+            //                <div class="col-auto">
+            //                    <img src="/AlumniImages/${row.Guid}.JPEG"
+            //                         class="alumni-members-image"
+            //                         alt="${row.MembersName}"
+            //                         onerror="this.src='/AlumniImages/0.JPEG'">
+            //                </div>
+            //                <div class="col">
+            //                    <strong class="text-primary">${row.MembersName}</strong><br>
+            //                    ${row.Course}<br>
+            //                    <small>${row.MemberType}</small><br>
+            //                    <small>Batch ${row.Batch}</small>
+            //                </div>
+            //            </div>
+            //        `;
+            //        }
+            //    },
+            //    {
+            //        data: null,
+            //        orderable: false,
+            //        render: function (data, type, row) {
+            //            // Determine status based on which button is enabled
+            //            const isActive = row.Activate_prop === 'disabled';
+            //            const statusText = isActive ? 'Active' : 'Inactive';
+            //            const statusClass = isActive ? 'success' : 'danger';
 
-        //new DataTable('#members-table');
-
-        //$('.dt-length').addClass('d-none');
-
-
-        new DataTable('#members-table', {
-            searching: false
+            //            return `
+            //            <div class="btn-group btn-group-sm" role="group">
+            //                <button class="btn btn-sm btn-secondary edit-member-btn" ${row.Edit_prop} guid="${row.Guid}">
+            //                    <i class="bi bi-pencil-square"></i>
+            //                </button>
+            //                <span class="badge bg-${statusClass} align-self-center">
+            //                    ${statusText}
+            //                </span>
+            //            </div>
+            //        `;
+            //        }
+            //    }
+            //],
+            language: {
+                search: "",
+                searchPlaceholder: "Search members..."
+            }
         });
 
+        // Hide default length dropdown
         $('.dt-length').addClass('d-none');
 
-        //  Custom search functionality ---- kbejar  7/3/25 ----
+        // Custom search functionality
         $('#member-search').on('keyup', function () {
-            const value = $(this).val().toLowerCase();
-            $('#members-table tbody tr').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-            });
+            table.search(this.value).draw();
         });
     });
 

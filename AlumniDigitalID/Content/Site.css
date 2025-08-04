@@ -120,7 +120,41 @@ body {
     font-weight: 500;
 }
 
+.search-container {
+    width: 300px;
+}
 
+.dataTables_filter {
+    display: none;
+}
+
+/* Style for the search input */
+#member-search {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.dataTables_filter {
+    display: none !important;
+}
+
+/* Style for the floating action button */
+.fab-button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+    .fab-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
 
 .icon-color {
     color: #E4C9AB;
@@ -378,7 +412,7 @@ footer {
     align-items: center;
 }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
     .perk-detail-image {
         height: 200px;
     }

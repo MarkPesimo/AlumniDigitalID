@@ -154,7 +154,7 @@
     </Reference>
     <Reference Include="ZMGModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Source Code\ZIPSapi\ZMGModel\ZMGModel\bin\Debug\ZMGModel.dll</HintPath>
+      <HintPath>..\..\..\ZMG API\ZMG-api\ZMGModel\ZMGModel\bin\Debug\ZMGModel.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
