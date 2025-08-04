@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using static ZMGModel.ViewModel.ALUMNI.Alumni_Model;
+using static ZMGModel.ViewModel.ALUMNI.Alumni_Model.Settings_model;
 using static ZMGModel.ViewModel.ALUMNI.Alumni_Model.User_model;
 
 namespace AlumniDigitalID.Repository
@@ -69,6 +70,31 @@ namespace AlumniDigitalID.Repository
             }
 
             return _id;
+        }
+
+        public bool RegenerateAlumniId (RegenerateAlumniId _model)
+        {
+            bool _result = false;
+            string _endpoint = "AlumniUser/RegenerateAlumniId";
+ 
+            var _content_prop = new Dictionary<string, string>
+            {
+                {"CreatedByUserId",     _model.CreatedByUserId.ToString() },
+                {"UserId",              _model.UserId.ToString() },
+                
+            };
+
+            string _body_content = JsonConvert.SerializeObject(_content_prop);
+            HttpContent _content = new StringContent(_body_content, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage _response = _globalrepository.GeneratePostRequest(_endpoint, _content);
+            if (_response.IsSuccessStatusCode)
+            {
+                var _value = _response.Content.ReadAsStringAsync().Result.ToString();
+                _result = bool.Parse(_value);
+            }
+
+            return _result;
         }
 
         public int ChangeUsername(Setting_model _model)

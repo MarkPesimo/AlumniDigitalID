@@ -123,6 +123,44 @@
         });
     });
 
+    $("#regenerate_id_btn").click(function (e) {
+        e.preventDefault();
+
+        ShowLoading('SHOW');
+        $.ajax({
+            type: "GET",
+            url: '/Settings/RegenerationAlumniId',
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                ShowLoading('HIDE');
+                $('#regenarate_id_modal').find(".modal-body").innerHTML = '';
+                $('#regenarate_id_modal').find(".modal-body").html(response);
+                $("#regenarate_id_modal").modal('show');
+            },
+            failure: function (response) { LogError(response); },
+            error: function (response) { LogError(response); }
+        });
+    });
+
+
+    $('#regenarate_id_modal').on('click', '#confirm-regenerate-button', function () {
+        ShowLoading('SHOW');
+        $.ajax({
+            url: '/Settings/RegenerationAlumniId',
+            type: "POST",
+            data: $('#regenerate-id-form').serialize(),
+            dataType: 'json',
+            success: function (result) {
+                if (result.Result == "ERROR") { ShowDangerMessage(result.Message); }
+                else {
+                    $("#regenarate_id_modal").modal('hide');
+                    ShowLoading('HIDE');
+                    ShowSuccessMessage(result.Message);
+                }
+            }
+        });
+    });
 
     //// Open Change PIN modal via AJAX
     //$("#change_pin_btn").click(function (e) {
@@ -248,6 +286,14 @@
         ShowLoading('HIDE');
         document.getElementById("toasterSuccess-body").innerHTML = _msg;
         const toaster = document.getElementById("toasterSuccess");
+        const toasterFunction = bootstrap.Toast.getOrCreateInstance(toaster);
+        toasterFunction.show();
+    }
+
+    function ShowDangerMessage(_msg) {
+        ShowLoading('HIDE');
+        document.getElementById("toasterDanger-body").innerHTML = _msg;
+        const toaster = document.getElementById("toasterDanger");
         const toasterFunction = bootstrap.Toast.getOrCreateInstance(toaster);
         toasterFunction.show();
     }

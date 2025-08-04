@@ -140,6 +140,50 @@ namespace AlumniDigitalID.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult RegenerationAlumniId()
+        {
+            try
+            {
+                RegenerateAlumniId _model = new RegenerateAlumniId();
+                _model.CreatedByUserId = _loginuserid;
+                _model.UserId = _loginuserid;
+
+                return PartialView("~/Views/Settings/partial/_regenerate_id_detail.cshtml", _model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult RegenerationAlumniId(RegenerateAlumniId _model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (!_settingsrepository.RegenerateAlumniId(_model))
+                    {
+                        return Json(new
+                        {
+                            Result = "ERROR",
+                            Message = "Existing request in progress — new request cannot be submitted at this time."
+                        });
+                    }
+                    return Json(new { Result = "Success", Message = "Your request has been successfully submitted and is now in queue for processing." });
+                }
+
+                List<string> _errors = _globalrepository.GetModelErrors(ModelState);
+                return Json(new { Result = "ERROR", Message = _errors[1], ElementName = _errors[0] });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
         [HttpPost]
         public ActionResult Update(Setting_model _model)
         {

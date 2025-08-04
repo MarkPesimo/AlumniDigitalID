@@ -60,58 +60,59 @@
         </div>
 
         @*@if ((User as ContextLoginUser_model).UserType == "Super Admin")
-        {
-            <!-- Notification Settings -->
-            <div class="col-12">
-                <a class="text-decoration-none">
-                    <div class="tile rounded py-3 shadow-sm">
-                        <i class="bi bi-bell fs-1 icon-color"></i>
-                        <div class="fw-bold mt-2 small">NOTIFICATIONS</div>
-                    </div>
-                </a>
-            </div>
+            {
+                <!-- Notification Settings -->
+                <div class="col-12">
+                    <a class="text-decoration-none">
+                        <div class="tile rounded py-3 shadow-sm">
+                            <i class="bi bi-bell fs-1 icon-color"></i>
+                            <div class="fw-bold mt-2 small">NOTIFICATIONS</div>
+                        </div>
+                    </a>
+                </div>
 
-            <!-- Notification Settings -->
-            <div class="col-12">
-                <a class="text-decoration-none">
-                    <div class="tile rounded py-3 shadow-sm">
-                        <i class="bi bi-bell fs-1 icon-color"></i>
-                        <div class="fw-bold mt-2 small">NOTIFICATIONS</div>
-                    </div>
-                </a>
-            </div>
-            }*@
-    </div>       
+                <!-- Notification Settings -->
+                <div class="col-12">
+                    <a class="text-decoration-none">
+                        <div class="tile rounded py-3 shadow-sm">
+                            <i class="bi bi-bell fs-1 icon-color"></i>
+                            <div class="fw-bold mt-2 small">NOTIFICATIONS</div>
+                        </div>
+                    </a>
+                </div>
+                }*@
+    </div>
 </div>
 
 @*<section class="login d-flex align-items-center">
-    <div class="container">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-md-8 col-lg-6 col-xl-5">
-                <h1 class="login-logo text-center text-white mb-4">
-                    <i class="fa-solid fa-gear"></i> <span class="ms-3">Settings</span>
-                </h1>
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <h1 class="login-logo text-center text-white mb-4">
+                        <i class="fa-solid fa-gear"></i> <span class="ms-3">Settings</span>
+                    </h1>
 
-                <div class="login-form shadow-sm border border-light">
-                    <button type="submit" class="btn mt-2 w-100 btn-secondary" id="change_username_btn">Change Username</button>
+                    <div class="login-form shadow-sm border border-light">
+                        <button type="submit" class="btn mt-2 w-100 btn-secondary" id="change_username_btn">Change Username</button>
 
-                    <button type="submit" class="btn mt-2 w-100 btn-secondary" id="change_password_btn">Change Password</button>
+                        <button type="submit" class="btn mt-2 w-100 btn-secondary" id="change_password_btn">Change Password</button>
 
-                    <button type="submit" class="btn mt-2 w-100 btn-secondary" id="change_pin_btn">Change PIN</button>
+                        <button type="submit" class="btn mt-2 w-100 btn-secondary" id="change_pin_btn">Change PIN</button>
 
-                    @if ((User as ContextLoginUser_model).UserType == "Super Admin")
-                    {
-                        <button type="submit" class="btn mt-2 w-100 btn-secondary" id="Members-btn">Alumni Members</button>
+                        @if ((User as ContextLoginUser_model).UserType == "Super Admin")
+                        {
+                            <button type="submit" class="btn mt-2 w-100 btn-secondary" id="Members-btn">Alumni Members</button>
 
-                        <button type="submit" class="btn mt-2 w-100 btn-secondary" id="Perks-btn">Manage Perks & Benefits</button>
-                    }
+                            <button type="submit" class="btn mt-2 w-100 btn-secondary" id="Perks-btn">Manage Perks & Benefits</button>
+                        }
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>*@
+    </section>*@
 
 @Html.Partial("~/Views/Settings/Modal/_change_username_modal.cshtml")
 @Html.Partial("~/Views/Settings/Modal/_change_password_modal.cshtml")
 @Html.Partial("~/Views/Settings/Modal/_change_pin_modal.cshtml")
+@Html.Partial("~/Views/Settings/Modal/_regenerate_id_modal.cshtml")

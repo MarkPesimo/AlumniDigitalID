@@ -1,0 +1,13 @@
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.Settings_model.RegenerateAlumniId
+
+@using (Html.BeginForm("Update", "Settings", FormMethod.Post, new { enctype = "multipart/form-data", name = "regenerate-id-form", id = "regenerate-id-form" }))
+{
+    @Html.HiddenFor(m => m.CreatedByUserId)
+    @Html.HiddenFor(m => m.UserId)
+
+    <p>Proceed with Alumni ID Regeneration?</p>
+
+}
+
+
+

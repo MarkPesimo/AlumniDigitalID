@@ -314,6 +314,8 @@
     <Content Include="Views\Alumni\partial\_edit.cshtml" />
     <Content Include="Views\Alumni\modal\_add_member_modal.cshtml" />
     <Content Include="Views\Alumni\partial\_add.cshtml" />
+    <Content Include="Views\Settings\modal\_regenerate_id_modal.cshtml" />
+    <Content Include="Views\Settings\partial\_regenerate_id_detail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
