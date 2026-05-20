@@ -23,6 +23,9 @@
                     btn.disabled = false;
                     ValidationError(result);
                 }
+                else if (result.Result == "ERROR") {
+                    window.location = result.URL;
+                }
                 else {
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(

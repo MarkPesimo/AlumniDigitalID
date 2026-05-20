@@ -47,6 +47,17 @@
             </a>
         </div>
 
+        <!--Download AlumniID-->
+        <div class="col-12">
+            <a href="@Url.Action("DownloadAlumniId", "Settings")" class="text-decoration-none" id="download_id_btn">
+                <div class="tile rounded py-3 shadow-sm">
+                    @* <i class="bi bi-envelope fs-1 icon-color"></i> *@
+                    
+                    <i class="bi bi-file-earmark-arrow-down fs-1 icon-color"></i>
+                    <div class="fw-bold mt-2 small">DOWNLOAD ALUMNI ID</div>
+                </div>
+            </a>
+        </div>
 
         <!--Generate AlumniId-->
         <div class="col-12">
@@ -116,3 +127,4 @@
 @Html.Partial("~/Views/Settings/Modal/_change_password_modal.cshtml")
 @Html.Partial("~/Views/Settings/Modal/_change_pin_modal.cshtml")
 @Html.Partial("~/Views/Settings/Modal/_regenerate_id_modal.cshtml")
+@Html.Partial("~/Views/Settings/Modal/_view_AlumniId_modal.cshtml")

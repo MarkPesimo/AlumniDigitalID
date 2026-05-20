@@ -10,6 +10,7 @@ namespace AlumniDigitalID.Models
         public class LoginResult
         {
             public string Result { get; set; }
+            public string AlumniGUID { get; set; }
             public int UserId { get; set; }
         }
     }

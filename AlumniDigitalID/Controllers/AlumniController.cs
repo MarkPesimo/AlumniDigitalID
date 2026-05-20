@@ -83,7 +83,12 @@ namespace AlumniDigitalID.Controllers
 
         }
 
-    
+        //[HttpGet]
+        //public ActionResult Renew(int _userid)
+        //{
+        //    Renew_model _model = _alumnirepository.GetRenew(_userid);
+        //    return View(_model);
+        //}
 
         [HttpGet]
         public ActionResult Members()

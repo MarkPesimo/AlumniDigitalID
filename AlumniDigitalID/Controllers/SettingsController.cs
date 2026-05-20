@@ -21,6 +21,8 @@ namespace AlumniDigitalID.Controllers
 
         private int _loginuserid = 0;
         public string _usertype = "User";
+        public string _loginuseralumnino = "";
+
 
         public SettingsController()
         {
@@ -32,9 +34,10 @@ namespace AlumniDigitalID.Controllers
             {
                 LoginUser_model _model = _userrepository.GetLoginUser();
                 if (_model != null)
-                {
+                {                    
                     _loginuserid = _model.UserId;
                     _usertype = _model.UserType;
+                    _loginuseralumnino = _model.AlumniNo;
                 }
             }
         }
@@ -220,5 +223,25 @@ namespace AlumniDigitalID.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult DownloadAlumniId()
+        {
+            //return PartialView("~/Views/Settings/partial/_ViewAlumniID.cshtml", _loginuseralumnino + ".png");
+            string imageName = _loginuseralumnino + ".png";
+            var imagePath = Server.MapPath(@"\AlumniId\" + _loginuseralumnino + ".png");
+
+            // Check if the file exists
+            if (!System.IO.File.Exists(imagePath))
+            {
+                //return HttpNotFound(); // Return a 404 if the file is not found
+                return View("NotFound");
+            }
+
+            // Determine the MIME type of the image
+            string mimeType = MimeMapping.GetMimeMapping(imageName);
+
+            // Return the file for download
+            return File(imagePath, mimeType, imageName);
+        }
     }
 }

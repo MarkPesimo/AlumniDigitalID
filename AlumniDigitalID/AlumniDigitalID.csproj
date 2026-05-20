@@ -154,7 +154,7 @@
     </Reference>
     <Reference Include="ZMGModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\ZMG API\ZMG-api\ZMGModel\ZMGModel\bin\Debug\ZMGModel.dll</HintPath>
+      <HintPath>..\..\..\Source Code\ZIPSapi\ZMGModel\ZMGModel\bin\Debug\ZMGModel.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +209,7 @@
     <Content Include="PerksAttachment\1.png" />
     <Content Include="Scripts\Alumni\Member.js" />
     <Content Include="Scripts\Alumni\Misc.js" />
+    <Content Include="Scripts\Alumni\Renew.js" />
     <Content Include="Scripts\Perks\Perks.js" />
     <Content Include="Scripts\Global\core.min.js" />
     <Content Include="Scripts\Global\Script.js" />
@@ -248,6 +249,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AlumniId\" />
     <Folder Include="AlumniImages\" />
     <Folder Include="App_Data\" />
     <Folder Include="Views\Course\" />
@@ -316,6 +318,12 @@
     <Content Include="Views\Alumni\partial\_add.cshtml" />
     <Content Include="Views\Settings\modal\_regenerate_id_modal.cshtml" />
     <Content Include="Views\Settings\partial\_regenerate_id_detail.cshtml" />
+    <Content Include="Views\Settings\partial\_ViewAlumniID.cshtml" />
+    <Content Include="Views\Settings\modal\_view_AlumniId_modal.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Account\MembershipRenewal.cshtml" />
+    <Content Include="Views\Shared\Layout\_Layout2.cshtml" />
+    <Content Include="Views\Account\RenewalSubmitted.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

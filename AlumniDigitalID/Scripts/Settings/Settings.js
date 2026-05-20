@@ -162,6 +162,28 @@
         });
     });
 
+    //$("#download_id_btn").click(function (e) {
+    //    e.preventDefault();
+
+    //    ShowLoading('SHOW');
+    //    $.ajax({
+    //        type: "GET",
+    //        url: '/Settings/DownloadAlumniId',
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "html",
+    //        success: function (response) {
+    //            ShowLoading('HIDE');
+    //            $('#view_alumniid_modal').find(".modal-body").innerHTML = '';
+    //            $('#view_alumniid_modal').find(".modal-body").html(response);
+    //            $("#view_alumniid_modal").modal('show');
+    //        },
+    //        failure: function (response) { LogError(response); },
+    //        error: function (response) { LogError(response); }
+    //    });
+    //});
+
+
+
     //// Open Change PIN modal via AJAX
     //$("#change_pin_btn").click(function (e) {
     //    e.preventDefault();

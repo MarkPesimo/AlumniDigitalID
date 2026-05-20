@@ -15,6 +15,7 @@ namespace AlumniDigitalID.Controllers
     {
         private GlobalRepository _globalrepository { get; set; }
         private UserRepository _userrepository { get; set; }
+        private AlumniRepository _alumnirepository { get; set; }
         //private userrepositroy _
         private string _Settings_Index = "~/Views/Account/Settings.cshtml";
 
@@ -22,6 +23,7 @@ namespace AlumniDigitalID.Controllers
         {
             if (_globalrepository == null) { _globalrepository = new GlobalRepository(); }
             if (_userrepository == null) { _userrepository = new UserRepository(); }
+            if (_alumnirepository == null) { _alumnirepository = new AlumniRepository(); }
             //if (_accountrepository == null) { _accountrepository = new AccountRepository(); }
         }
 
@@ -78,9 +80,26 @@ namespace AlumniDigitalID.Controllers
                         }
                         else
                         {
-                            return Json(new { Result = "Success",
-                                UserId = _login_result.UserId,
-                                URL = "/Alumni/Index" });
+                            if (_login_result.Result == "Your Alumni Account Has Expired. To restore access, please reach out to your administrator for assistance.")
+                            {
+                                return Json(new
+                                {
+                                    Result = "EXPIRED",
+                                    Message = _login_result.Result,
+                                    ElementName = "Username",
+                                    _login_result.UserId,
+                                    URL = "/Account/MembershipRenewal?_Userid=" + _login_result.UserId
+                                });
+                            }
+                            else
+                            {
+                                return Json(new
+                                {
+                                    Result = "Success",
+                                    UserId = _login_result.UserId,
+                                    URL = "/Alumni/Index"
+                                });
+                            }
                         }
                     }
                     else
@@ -161,9 +180,28 @@ namespace AlumniDigitalID.Controllers
                     }
                     else
                     {
-                        return Json(new { Result = "ERROR",
-                            Message = _login_result.Result,
-                            ElementName = "Username" });
+                        if (_login_result.Result == "Your Alumni Account Has Expired. To restore access, please reach out to your administrator for assistance.")
+                        {
+                            return Json(new
+                            {
+                                Result = "EXPIRED",
+                                Message = _login_result.Result,
+                                ElementName = "Username",
+                                _login_result.UserId,
+                                URL = "/Account/MembershipRenewal?_guid=" + _login_result.AlumniGUID
+                            });
+                        }
+                        else
+                        {
+                            return Json(new
+                            {
+                                Result = "ERROR",
+                                Message = _login_result.Result,
+                                ElementName = "Username"
+                            });
+
+                        }
+                        
                     }
                 }
 
@@ -187,6 +225,49 @@ namespace AlumniDigitalID.Controllers
             Login_model model = new Login_model();
             model.SchoolId = 1;
             return View("~/Views/Account/Login.cshtml", model);
+        }
+
+        [HttpGet]
+        public ActionResult MembershipRenewal(string  _guid)
+        {
+            Renew_model _model = _alumnirepository.GetRenew(_guid);
+            _model.RenewType = "Expired";
+            return View("~/Views/Account/MembershipRenewal.cshtml", _model);
+        }
+
+        [HttpPost]
+        public ActionResult MembershipRenewal(Renew_model _model)
+        {
+            //Renew_model _model = _alumnirepository.GetRenew(_guid);
+            //_model.RenewType = "Expired";
+            //return View("~/Views/Account/Renew.cshtml", _model);
+            if (_alumnirepository.CheckRenewal(_model.UserId) > 0)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    Message = "Existing request in progress — new request cannot be submitted at this time."
+                });
+            }
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int _id = _alumnirepository.MembershipRenewal(_model);
+                    return Json(new { Result = "Success",
+                        URL = "/Account/RenewalSubmitted",
+                        //Message = "Your request has been successfully submitted and is now in queue for processing."
+                    });
+                }
+
+                List<string> _errors = _globalrepository.GetModelErrors(ModelState);
+                return Json(new { Result = "ERROR", Message = _errors[1], ElementName = _errors[0] });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
         }
 
         //[Authorize]

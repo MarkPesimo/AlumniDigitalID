@@ -127,6 +127,7 @@ namespace Alumni.Repository
             LoginResult _result = new LoginResult
             {
                 UserId = 0,
+                AlumniGUID = "",
                 Result = ""
             };
 
@@ -156,6 +157,8 @@ namespace Alumni.Repository
                     {
                         if (DateTime.Parse(_CustomPrincipalSerializeModel.Expiration) < DateTime.Now)
                         {
+                            _result.UserId = _CustomPrincipalSerializeModel.UserId;
+                            _result.AlumniGUID = _CustomPrincipalSerializeModel.Guid;
                             _result.Result = "Your Alumni Account Has Expired. To restore access, please reach out to your administrator for assistance.";
                             return _result;
                         }

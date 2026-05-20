@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using static ZMGModel.ViewModel.ALUMNI.Alumni_Model;
 using static ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model;
 using static ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model;
+using static ZMGModel.ViewModel.ALUMNI.Alumni_Model.User_model;
 
 namespace Alumni.Repository
 {
@@ -20,7 +21,87 @@ namespace Alumni.Repository
             if (_globalrepository == null) { _globalrepository = new GlobalRepository(); }
         }
 
- 
+        public int CheckRenewal(int _userid)
+        {
+            try
+            {
+                int _obj = 0;
+                string _endpoint = "AlumniUser/CheckRenewal/" + _userid.ToString();
+                HttpResponseMessage _response = _globalrepository.GenerateGetRequest(_endpoint);
+                if (_response.IsSuccessStatusCode)
+                {
+                    var _value = _response.Content.ReadAsStringAsync().Result.ToString();
+                    _obj = JsonConvert.DeserializeObject<int>(_value);
+                }
+
+                return _obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int MembershipRenewal(Renew_model _model)
+        {
+            int _id = 0;
+            string _endpoint = "Alumni/MembershipRenewal";
+
+            if (_model.FileType == null) { _model.FileType = "-"; }
+            if (_model.Reason == null) { _model.Reason = "-"; }
+
+
+            var _content_prop = new Dictionary<string, string>
+            {
+                {"Id",                      _model.Id.ToString() },
+                {"UserId",                  _model.UserId.ToString() },
+                {"AlumniGroupId",           _model.AlumniGroupId.ToString() },
+                {"AlumniNo",                _model.AlumniNo.ToString() },
+                {"MembersName",             _model.MembersName.ToString() },
+                {"MemberGUID",              _model.MemberGUID.ToString() },
+                {"RenewType",               _model.RenewType.ToString() },
+                {"Reason",                  _model.Reason.ToString() },
+                {"Mode",                    _model.Mode.ToString() },
+                {"MembershipExpiration",    _model.MembershipExpiration.ToString() },
+                {"FileType",                _model.FileType.ToString() },
+                
+
+            };
+
+            string _body_content = JsonConvert.SerializeObject(_content_prop);
+            HttpContent _content = new StringContent(_body_content, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage _response = _globalrepository.GeneratePostRequest(_endpoint, _content);
+            if (_response.IsSuccessStatusCode)
+            {
+                var _value = _response.Content.ReadAsStringAsync().Result.ToString();
+                _id = int.Parse(_value);
+            }
+
+            return _id;
+        }
+
+
+        public Renew_model GetRenew(string _guid)
+        {
+            try
+            {
+                Renew_model _obj = new Renew_model();
+                string _endpoint = "AlumniUser/GetByGUID/" + _guid.ToString();
+                HttpResponseMessage _response = _globalrepository.GenerateGetRequest(_endpoint);
+                if (_response.IsSuccessStatusCode)
+                {
+                    var _value = _response.Content.ReadAsStringAsync().Result.ToString();
+                    _obj = JsonConvert.DeserializeObject<Renew_model>(_value);
+                }
+
+                return _obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public Profile_model GetProfile(int _id)
         {
