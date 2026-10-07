@@ -1,4 +1,4 @@
-﻿@model  List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model>
+﻿@model List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model>
 
 @{
     ViewBag.Title = "Perks & Benefits";
@@ -9,26 +9,190 @@
     @*<script src="~/Scripts/Alumni/Perks.js"></script>*@
 }
 
-<div class="container">
-    <div class="perks-banner text-center mb-4">
-        <h2 class="mt-4 mb-4">Perks & Benefits</h2>
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    .perks-hero-banner {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        color: #ffffff;
+        padding: 28px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(128, 0, 32, 0.18);
+        margin-bottom: 28px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .perks-hero-banner h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .perks-hero-banner p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 6px;
+            margin-bottom: 0;
+        }
+
+    .perk-card-wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .perk-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        overflow: hidden;
+        transition: all 0.25 ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+        .perk-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(128, 0, 32, 0.15);
+            border-color: rgba(128, 0, 32, 0.25);
+        }
+
+    .perks-image-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background-color: #edf2f7;
+    }
+
+    .perk-image-bg {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: transform 0.3s ease;
+    }
+
+    .perk-card:hover .perk-image-bg {
+        transform: scale(1.05);
+    }
+
+    .perks-control {
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .perk-title {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 12px;
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-height: 2.5em;
+    }
+
+    .btn-perk-action {
+        background-color: var(--ust-red);
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: none;
+        transition: background-color 0.2s ease;
+        width: 100%;
+        text-decoration: none !important;
+    }
+
+        .btn-perk-action:hover, .btn-perk-action:active {
+            background-color: var(--ust-red-dark);
+            color: #ffffff;
+        }
+
+    .empty-perks-box {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 40px 20px;
+        text-align: center;
+        border: 1px dashed #cbd5e1;
+    }
+
+    .empty-perks-icon {
+        font-size: 2.8rem;
+        color: #94a3b8;
+        margin-bottom: 12px;
+    }
+</style>
+
+<div class="container my-3">
+    <div class="perks-hero-banner">
+        <h2><i class="fa-solid fa-gift me-2"></i> Perks & Benefits</h2>
+        <p>Exclusive offers, discounts, and privileges reserved for UST AMV Alumni members</p>
     </div>
 
-    <div class="row">
-        @foreach (var perk in Model)
-        {
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="perk-card">
-                    <div class="perks-image">
-                        <div class="perk-image mb-3" style="background-image:url('../PerksAttachment/@perk.Id@perk.FileType')"></div>
-                    </div>
-                    <div class="perks-control">
-                        <h5 class="perk-title">@perk.Title</h5>
-                        <a href="@Url.Action("PerkByGuid", "Perks", new { _guid = perk.Guid })" class="btn btn-danger mt-2" id="@perk.Id" guid="@perk.Guid">LEARN MORE</a>
+    @if (Model != null && Model.Any())
+    {
+        <div class="row g-3">
+            @foreach (var perk in Model)
+            {
+                <div class="col-6 col-md-4 col-lg-3 mb-2">
+                    <div class="perk-card-wrapper">
+                        <div class="perk-card">
+                            <div class="perks-image-wrapper">
+                                <div class="perk-image-bg"
+                                     style="background-image: url('../PerksAttachment/@perk.Id@perk.FileType'), url('../Content/Images/default-perk.jpg');">
+                                </div>
+                            </div>
+
+                            <div class="perks-control">
+                                <h5 class="perk-title" title="@perk.Title">@perk.Title</h5>
+
+                                <a href="@Url.Action("PerkByGuid", "Perks", new { _guid = perk.Guid })"
+                                   class="btn btn-perk-action mt-auto"
+                                   id="@perk.Id"
+                                   guid="@perk.Guid">
+                                    LEARN MORE <i class="fa-solid fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="empty-perks-box">
+            <div class="empty-perks-icon">
+                <i class="fa-solid fa-box-open"></i>
             </div>
-        }
-    </div>
+            <h5 class="fw-bold text-secondary">No Perks Available</h5>
+            <p class="text-muted small mb-0">Check back soon for new exclusive discounts and member offers.</p>
+        </div>
+    }
 </div>
- 

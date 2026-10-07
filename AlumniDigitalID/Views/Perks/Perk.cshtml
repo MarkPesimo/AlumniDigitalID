@@ -1,4 +1,4 @@
-﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model
 
 @{
     ViewBag.Title = Model.Title + " - Perk Details";
@@ -8,45 +8,179 @@
     <script src="~/Scripts/Home.js"></script>
 }
 
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
 
-<div class="container perk-detail-container">
-    <!-- Header Banner -->
-    <div class="perk-detail-banner mb-4 shadow-sm rounded-4 overflow-hidden">
-        <div class="perk-header d-flex align-items-center px-3 py-2">
-            <a href="@Url.Action("Perks", "Perks")" class="btn btn-light me-3 rounded-circle shadow-sm" title="Back">
-                <i class="bi bi-arrow-left fs-5 text-dark"></i>
-            </a>
-            <h4 class="mb-0 text-white flex-grow-1 text-center">PERKS & BENEFITS</h4>
-        </div>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
 
-        <!-- Image Section -->
-        <div class="perk-detail-image" style="background-image:url('../PerksAttachment/@Model.Id@Model.FileType');"></div>
+    .perk-detail-container {
+        max-width: 800px;
+        margin: 0 auto 40px auto;
+    }
+
+    .perk-header-bar {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        padding: 14px 20px;
+        border-radius: 14px 14px 0 0;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(128, 0, 32, 0.15);
+    }
+
+    .btn-back-circle {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+        .btn-back-circle:hover {
+            background-color: #ffffff;
+            color: var(--ust-red);
+            transform: translateX(-2px);
+        }
+
+    .header-title-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .perk-cover-wrapper {
+        width: 100%;
+        max-height: 380px;
+        aspect-ratio: 16 / 9;
+        background-color: #edf2f7;
+        position: relative;
+        overflow: hidden;
+        border-left: 1px solid #e2e8f0;
+        border-right: 1px solid #e2e8f0;
+    }
+
+    .perk-cover-image {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .perk-detail-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-top: none;
+        border-radius: 0 0 16px 16px;
+        padding: 28px 24px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .perk-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background-color: rgba(128, 0, 32, 0.08);
+        color: var(--ust-red);
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+    }
+
+    .perk-detail-title {
+        color: #1e293b;
+        font-size: 1.5rem;
+        font-weight: 800;
+        line-height: 1.3;
+        margin-bottom: 16px;
+    }
+
+    .perk-detail-text {
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        white-space: pre-line;
+        margin-bottom: 24px;
+    }
+
+    .perk-notice-box {
+        background-color: #f8fafc;
+        border-left: 4px solid var(--ust-red);
+        border-radius: 8px;
+        padding: 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .perk-notice-icon {
+        font-size: 1.25rem;
+        color: var(--ust-red);
+        margin-top: 2px;
+    }
+
+    .perk-notice-text {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin: 0;
+    }
+</style>
+
+<div class="container my-4 perk-detail-container">
+
+    <div class="perk-header-bar">
+        <a href="@Url.Action("Perks", "Perks")" class="btn-back-circle" title="Back to Perks">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h4 class="header-title-text flex-grow-1 text-center me-4">Perks & Benefits</h4>
     </div>
 
-    <!-- Perk Card -->
-    <div class="perk-detail-card bg-white shadow rounded-4 p-4 mb-5">
-        <div class="perk-detail-body">
-            <h2 class="perk-detail-title text-center text-primary fw-bold mb-3">@Model.Title</h2>
-            <p class="perk-detail-text text-secondary">@Model.Description</p>
+    <div class="perk-cover-wrapper">
+        <div class="perk-cover-image"
+             style="background-image: url('../PerksAttachment/@Model.Id@Model.FileType'), url('../Content/Images/default-perk.jpg');">
         </div>
-    </div>
-</div>
-
-
-
-<!--
-<div class="container perk-detail-container">
-    <div class="perk-detail-banner text-center mb-4">
-        <div class="text-center mt-4">
-            <a href="@Url.Action("Perks", "Alumni")" class="btn btn-primary">BACK TO PERKS</a>
-        </div>
-        <div class="perk-detail-image" style="background-image:url('../Perks/@Model.Id@Model.FileType')"></div>
     </div>
 
     <div class="perk-detail-card">
         <div class="perk-detail-body">
-            <h3 class="perk-detail-title">@Model.Title</h3>
+
+            <div class="perk-badge">
+                <i class="fa-solid fa-tags"></i> Exclusive Alumni Perk
+            </div>
+
+            <h2 class="perk-detail-title">@Model.Title</h2>
+
             <p class="perk-detail-text">@Model.Description</p>
+
+            <div class="perk-notice-box">
+                <div class="perk-notice-icon">
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+                <p class="perk-notice-text">
+                    <strong>How to avail:</strong> Present your official UST Alumni Virtual or Physical Identification Card at participating merchant locations or follow specific partner instructions provided above.
+                </p>
+            </div>
+
         </div>
     </div>
-</div>-->
+
+</div>

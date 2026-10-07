@@ -1,24 +1,153 @@
-﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Misc_model
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.Misc_model
 
 @{
-    ViewBag.Title = "Terms & Condition";
+    ViewBag.Title = "Terms & Conditions";
 }
 
 @section Scripts{
     <script src="~/Scripts/Home.js"></script>
 }
 
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
 
-<div class="container">
-    <div class="terms-banner text-center mb-4">
-        <h2 class="mt-4 mb-4">TERMS AND CONDITIONS</h2>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    .terms-container {
+        max-width: 850px;
+        margin: 0 auto 40px auto;
+    }
+
+    .terms-hero-banner {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        color: #ffffff;
+        padding: 28px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(128, 0, 32, 0.18);
+        margin-bottom: 24px;
+        text-align: center;
+    }
+
+        .terms-hero-banner h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .terms-hero-banner p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 6px;
+            margin-bottom: 0;
+        }
+
+    .terms-detail-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 32px 28px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .terms-detail-body {
+        color: #334155;
+        font-size: 0.92rem;
+        line-height: 1.75;
+    }
+
+        .terms-detail-body h1,
+        .terms-detail-body h2,
+        .terms-detail-body h3,
+        .terms-detail-body h4 {
+            color: var(--ust-red);
+            font-weight: 700;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .terms-detail-body h3 {
+            font-size: 1.15rem;
+        }
+
+        .terms-detail-body h4 {
+            font-size: 1.05rem;
+        }
+
+        .terms-detail-body p {
+            margin-bottom: 16px;
+        }
+
+        .terms-detail-body ul,
+        .terms-detail-body ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .terms-detail-body li {
+            margin-bottom: 8px;
+        }
+
+    .terms-notice-box {
+        background-color: #f8fafc;
+        border-left: 4px solid var(--ust-red);
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 28px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .terms-notice-icon {
+        font-size: 1.2rem;
+        color: var(--ust-red);
+        margin-top: 2px;
+    }
+
+    .terms-notice-text {
+        font-size: 0.82rem;
+        color: #64748b;
+        margin: 0;
+    }
+</style>
+
+<div class="container my-3 terms-container">
+
+    <div class="terms-hero-banner">
+        <h2><i class="fa-solid fa-file-contract me-2"></i> Terms & Conditions</h2>
+        <p>Guidelines and terms governing your use of the UST AMV Alumni Portal</p>
     </div>
 
-    <div class="terms-detail-card bg-white p-4 pt-1">
+    <div class="terms-detail-card">
         <div class="terms-detail-body">
-            <p class="terms-detail-text">
-                @(new HtmlString(@Model.Description))
-            </p>
+            @if (Model != null && !string.IsNullOrEmpty(Model.Description))
+            {
+                @Html.Raw(Model.Description)
+            }
+            else
+            {
+                <p class="text-muted italic">No terms and conditions details available at this time.</p>
+            }
+        </div>
+
+        <div class="terms-notice-box">
+            <div class="terms-notice-icon">
+                <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <div class="terms-notice-text">
+                <strong>Agreement Notice:</strong>
+                By creating an account and logging into the UST AMV Alumni Portal, you acknowledge that you have read, understood, and agree to abide by these terms and conditions.
+            </div>
         </div>
     </div>
+
 </div>

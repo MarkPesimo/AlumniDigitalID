@@ -1,96 +1,272 @@
-﻿
-@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.User_model.Login_model
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.User_model.Login_model
 
 @{
-    ViewBag.Title = "Digital ID Authentication";
+    ViewBag.Title = "Digital ID Authentication | UST Alumni";
     Layout = "~/Views/Shared/Layout/_BlankLayout.cshtml";
 }
-
 
 @section Scripts
 {
     <script src="~/Scripts/User/User.js"></script>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("Password");
+            var toggleIcon = document.getElementById("togglePasswordIcon");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleIcon.classList.remove("fa-eye");
+                toggleIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                toggleIcon.classList.remove("fa-eye-slash");
+                toggleIcon.classList.add("fa-eye");
+            }
+        }
+    </script>
 }
 
-    <style>
-        body {
-            background-color: #edd2b7;
+<style>
+    :root {
+        --ust-gold: #FFC72C;
+        --ust-gold-dark: #e0aa14;
+        --ust-black: #1a1a1a;
+        --ust-red: #c8102e;
+        --ust-border: #e2e8f0;
+    }
+
+    body {
+        background: linear-gradient(135deg, #111111 0%, #222222 50%, #1a1a1a 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        margin: 0;
+        padding: 20px 15px;
+    }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 199, 44, 0.15) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .login-container {
-            width: 100%;
-            max-width: 350px;
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .ust-login-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 420px;
+        background-color: #ffffff;
+        padding: 38px 30px 32px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        border-top: 5px solid var(--ust-gold);
+    }
+
+    .ust-login-header {
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    .ust-login-logo {
+        height: 75px;
+        width: auto;
+        object-fit: contain;
+        margin-bottom: 15px;
+    }
+
+    .ust-login-title {
+        font-weight: 800;
+        color: var(--ust-black);
+        font-size: 1.45rem;
+        letter-spacing: -0.3px;
+        margin-bottom: 4px;
+    }
+
+    .ust-login-subtitle {
+        color: #666;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .ust-input-group {
+        position: relative;
+        margin-bottom: 18px;
+    }
+
+        .ust-input-group .input-group-text {
+            background-color: #f8f9fa;
+            border-color: var(--ust-border);
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            color: #666;
+            padding-left: 14px;
+            padding-right: 14px;
         }
 
-        .form-control::placeholder {
-            font-style: italic;
+        .ust-input-group .form-control {
+            border-color: var(--ust-border);
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding: 12px 14px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
 
-        .pin-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: darkred;
-            display: inline-block;
-            margin: 0 6px;
+            .ust-input-group .form-control:focus {
+                border-color: var(--ust-gold);
+                box-shadow: 0 0 0 3px rgba(255, 199, 44, 0.25);
+                outline: none;
+            }
+
+    .ust-password-container .form-control {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .btn-password-toggle {
+        background-color: #f8f9fa;
+        border: 1px solid var(--ust-border);
+        border-left: none;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        color: #777;
+        padding: 0 14px;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+        .btn-password-toggle:hover {
+            color: var(--ust-black);
         }
-    </style>
 
-<div class="d-flex flex-column justify-content-center align-items-center vh-100">
-    <div class="login-container text-center">
-        @*<img src="/images/Alumni card-03 2.png" alt="Logo" height="60" class="mb-3" />*@
-        <h5 class="mb-4">
-            <strong><i class="bi bi-person me-2"></i>ALUMNI LOGIN</strong>
-        </h5>
+    .ust-alert-danger {
+        background-color: #fdf2f2;
+        border: 1px solid #f8b4b4;
+        color: var(--ust-red);
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
+    .btn-ust-submit {
+        background: linear-gradient(135deg, var(--ust-gold) 0%, var(--ust-gold-dark) 100%);
+        color: #111111;
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(255, 199, 44, 0.35);
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 24px;
+    }
 
-        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { id = "login-Form" }))
-        {
-            @Html.HiddenFor(m => m.SchoolId)
+        .btn-ust-submit:hover {
+            background: linear-gradient(135deg, #ffd359 0%, var(--ust-gold) 100%);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255, 199, 44, 0.45);
+        }
 
-            <div class="row" id="div-validation" style="display: none;">
-                <div class="col-lg-12 mb-3">
-                    <label for="html" id="error-message-label" class="form-label text-danger"></label><br>
-                </div>
+    .ust-login-footer {
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        font-size: 0.82rem;
+    }
+
+        .ust-login-footer a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+            .ust-login-footer a:hover {
+                color: var(--ust-black);
+                text-decoration: underline;
+            }
+
+    .ust-back-link {
+        color: #888 !important;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<div class="ust-login-card">
+    <div class="ust-login-header">
+        <img src="~/Content/Images/Alumni-DigitalId-logo.png" alt="UST Alumni Logo" class="ust-login-logo" />
+        <h4 class="ust-login-title">Alumni Authentication</h4>
+        <div class="ust-login-subtitle">Sign in to access your Digital ID</div>
+    </div>
+
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { id = "login-Form" }))
+    {
+        @Html.HiddenFor(m => m.SchoolId)
+        
+        <div class="ust-alert-danger" id="div-validation" style="display: none;">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="error-message-label"></span>
+        </div>
+        
+        <div class="ust-input-group">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fa-regular fa-user"></i>
+                </span>
+                @Html.TextBoxFor(m => m.Username, new {
+                    @class = "form-control",
+                    @placeholder = "Username or Student No.",
+                    autocomplete = "username"
+                })
             </div>
-
-            <div class="alert alert-danger d-none" id="div-validation">
-                <label id="error-message-label" class="mb-0"></label>
+        </div>
+        
+        <div class="ust-input-group ust-password-container">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-lock"></i>
+                </span>
+                @Html.PasswordFor(m => m.Password, new {
+                    @class = "form-control",
+                    @placeholder = "Password",
+                    id = "Password"
+                })
+                <button type="button" class="btn-password-toggle" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
+                    <i class="fa-regular fa-eye" id="togglePasswordIcon"></i>
+                </button>
             </div>
+        </div>
+        
+        <button type="submit" class="btn-ust-submit w-100" id="login-btn">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+    }
 
-
-
-            <div class="form-group mt-3">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="bi bi-person"></i>
-                    </span>
-                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control bg-white", @placeholder = "Username", autocomplete = "off" })
-                </div>
-            </div>
-
-
-            <div class="form-group mt-3">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="bi bi-key"></i>
-                    </span>
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control bg-white", @placeholder = "Password" })
-
-                </div>
-
-            </div>
-
-            <button type="submit" class="btn btn-danger w-100 mt-4" id="login-btn">Login</button>
-        }
-
-        @*<div class="mt-3">
-            <a href="#" class="text-muted small">Forgot your password?</a>
-        </div>*@
+    <div class="ust-login-footer">
+        <a href="mailto:alumni@ust.edu.ph?subject=Alumni%20Digital%20ID%20Password%20Reset">
+            <i class="fa-regular fa-circle-question me-1"></i> Forgot Password / Assistance
+        </a>
+        <a href="@Url.Action("Index", "Home")" class="ust-back-link">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back to Welcome Page
+        </a>
     </div>
 </div>
- 

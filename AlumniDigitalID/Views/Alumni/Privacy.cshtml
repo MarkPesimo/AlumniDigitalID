@@ -1,25 +1,153 @@
-﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Misc_model
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.Misc_model
 
 @{
-    ViewBag.Title = "Privacy";
+    ViewBag.Title = "Privacy Policy";
 }
 
 @section Scripts{
     <script src="~/Scripts/Home.js"></script>
-
 }
 
-<div class="container">
-    <div class="privacy-banner text-center mb-4">
-        <h2 class="mt-4 mb-4">PRIVACY POLICY</h2>
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    .privacy-container {
+        max-width: 850px;
+        margin: 0 auto 40px auto;
+    }
+
+    .privacy-hero-banner {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        color: #ffffff;
+        padding: 28px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(128, 0, 32, 0.18);
+        margin-bottom: 24px;
+        text-align: center;
+    }
+
+        .privacy-hero-banner h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .privacy-hero-banner p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 6px;
+            margin-bottom: 0;
+        }
+
+    .privacy-detail-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 32px 28px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .privacy-detail-body {
+        color: #334155;
+        font-size: 0.92rem;
+        line-height: 1.75;
+    }
+
+        .privacy-detail-body h1,
+        .privacy-detail-body h2,
+        .privacy-detail-body h3,
+        .privacy-detail-body h4 {
+            color: var(--ust-red);
+            font-weight: 700;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .privacy-detail-body h3 {
+            font-size: 1.15rem;
+        }
+
+        .privacy-detail-body h4 {
+            font-size: 1.05rem;
+        }
+
+        .privacy-detail-body p {
+            margin-bottom: 16px;
+        }
+
+        .privacy-detail-body ul,
+        .privacy-detail-body ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .privacy-detail-body li {
+            margin-bottom: 8px;
+        }
+
+    .privacy-contact-notice {
+        background-color: #f8fafc;
+        border-left: 4px solid var(--ust-red);
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 28px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .privacy-notice-icon {
+        font-size: 1.2rem;
+        color: var(--ust-red);
+        margin-top: 2px;
+    }
+
+    .privacy-notice-text {
+        font-size: 0.82rem;
+        color: #64748b;
+        margin: 0;
+    }
+</style>
+
+<div class="container my-3 privacy-container">
+
+    <div class="privacy-hero-banner">
+        <h2><i class="fa-solid fa-shield-halved me-2"></i> Privacy Policy</h2>
+        <p>How we collect, protect, and manage your personal information</p>
     </div>
 
-    <div class="privacy-detail-card bg-white p-4 pt-1">
-        <div class="terms-detail-body">
-            <p class="terms-detail-text">
-                @(new HtmlString(@Model.Description))                
-            </p>
+    <div class="privacy-detail-card">
+        <div class="privacy-detail-body">
+            @if (Model != null && !string.IsNullOrEmpty(Model.Description))
+            {
+                @Html.Raw(Model.Description)
+            }
+            else
+            {
+                <p class="text-muted italic">No privacy policy details available at this time.</p>
+            }
+        </div>
+
+        <div class="privacy-contact-notice">
+            <div class="privacy-notice-icon">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <div class="privacy-notice-text">
+                <strong>Data Privacy Commitment:</strong>
+                We are committed to protecting your privacy in compliance with Republic Act No. 10173 (Data Privacy Act of 2012). For privacy concerns or requests regarding your personal data, please contact the Alumni Office.
+            </div>
         </div>
     </div>
-</div>
 
+</div>

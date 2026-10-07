@@ -1,38 +1,208 @@
-﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model.Profile_model
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model.Profile_model
 
 @{
     ViewBag.Title = "Alumni Information";
-    
 }
 
 @section Scripts{
     <script src="~/Scripts/Alumni/Profile.js"></script>
 }
- 
 
-<div class="container py-4 mt-2" style="max-width: 480px; margin: 0 auto; background-color: #fff;">
-    <div class="card id-card mt-4 position-relative" style="background-image:url('../Content/Images/Card/@Model.AlumniMemberCard')">
-        <div class="card-body text-center">
-            <h5 class="id-name fw-bold mb-1">@Model.Firstname @Model.Lastname </h5>
-            <div class="id-course">@Model.CourseName</div>
-            <div class="id-batch mb-3">Batch @Model.YearGraduated</div>
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
+
+    html, body {
+        height: 100dvh;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    .profile-screen-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 10px 14px;
+        box-sizing: border-box;
+    }
+
+    .profile-app-container {
+        width: 100%;
+        max-width: 440px;
+        height: 100%;
+        background-color: #ffffff;
+        border-radius: 18px;
+        padding: clamp(8px, 1.8vh, 18px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden; 
+    }
+
+    .dept-header {
+        text-align: center;
+        flex-shrink: 0;
+        margin-bottom: clamp(4px, 1vh, 12px);
+    }
+
+    .dept-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background-color: var(--ust-red);
+        color: #ffffff;
+        font-size: clamp(0.62rem, 1.2vh, 0.72rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: clamp(3px, 0.6vh, 5px) clamp(10px, 2vw, 14px);
+        border-radius: 16px;
+    }
+
+    .id-card-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1.586 / 1;
+        max-height: 28vh;
+        border-radius: 14px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        flex-shrink: 1;
+        margin-bottom: clamp(6px, 1.5vh, 16px);
+        align-self: center;
+    }
+
+    .id-card-bottom-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: clamp(6px, 1.5vh, 12px) clamp(10px, 2vw, 14px) clamp(6px, 1vh, 10px);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 75%, transparent 100%);
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .id-user-name {
+        font-size: clamp(0.95rem, 2.2vh, 1.2rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0;
+        line-height: 1.15;
+        letter-spacing: 0.2px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .id-user-course {
+        font-size: clamp(0.68rem, 1.4vh, 0.8rem);
+        color: #e2e2e2;
+        font-weight: 500;
+        margin-top: 1px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    .id-user-batch {
+        display: inline-block;
+        font-size: clamp(0.58rem, 1.1vh, 0.68rem);
+        font-weight: 700;
+        background-color: var(--ust-gold);
+        color: #111111;
+        padding: 1px 6px;
+        border-radius: 8px;
+        margin-top: 3px;
+    }
+
+    .id-footer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: clamp(3px, 0.8vh, 8px);
+        padding-top: clamp(2px, 0.5vh, 5px);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .id-number {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 700;
+        font-size: clamp(0.68rem, 1.3vh, 0.8rem);
+        letter-spacing: 0.5px;
+        color: #ffffff;
+    }
+
+    .id-meta-right {
+        text-align: right;
+    }
+
+    .id-member-type {
+        font-size: clamp(0.6rem, 1.1vh, 0.68rem);
+        font-weight: 700;
+        color: var(--ust-gold);
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .id-expiry-date {
+        font-size: clamp(0.55rem, 1vh, 0.62rem);
+        color: #cccccc;
+        margin-top: 1px;
+    }
+
+    .menu-section-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 0; 
+    }
+</style>
+
+<div class="profile-screen-wrapper">
+    <div class="profile-app-container">
+        <div class="dept-header">
+            <span class="dept-badge">
+                <i class="fa-solid fa-calculator"></i> ACCOUNTANCY
+            </span>
         </div>
 
-        <!-- Bottom-Left and Bottom-Right Details -->
-        <div class="id-footer-details d-flex justify-content-between w-100 px-3">
-            <div class="id-alumNumber">@Model.AlumniNo</div>
-            <div class="id-footer">
-                <div class="id-membership">@Model.MemberType</div>
-                <div class="id-expiry">Exp: @Model.MembershipExpiration</div>
+        <div class="id-card-container" style="background-image: url('../Content/Images/Card/@Model.AlumniMemberCard');">
+            <div class="id-card-bottom-overlay">
+                <h5 class="id-user-name">@Model.Firstname @Model.Lastname</h5>
+                <div class="id-user-course">@Model.CourseName</div>
+                <div>
+                    <span class="id-user-batch">Batch @Model.YearGraduated</span>
+                </div>
+
+                <div class="id-footer-row">
+                    <div class="id-number">@Model.AlumniNo</div>
+                    <div class="id-meta-right">
+                        <div class="id-member-type">@Model.MemberType</div>
+                        <div class="id-expiry-date">Exp: @Model.MembershipExpiration</div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="menu-section-container">
+            @{
+                Html.RenderAction("MainMenus", "Settings");
+            }
+        </div>
     </div>
-
-
-
-    <!-- ID Card -->
-    @{
-        Html.RenderAction("MainMenus", "Settings");
-    }
- 
 </div>

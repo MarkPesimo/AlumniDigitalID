@@ -1,103 +1,197 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "UST Alumni Digital ID";
     Layout = "~/Views/Shared/Layout/_BlankLayout.cshtml";
 }
 
 @section Scripts{
     <script src="~/Scripts/Home.js"></script>
-
 }
 
-
-
 <style>
+    :root {
+        --ust-gold: #FFC72C;
+        --ust-gold-dark: #e0aa14;
+        --ust-black: #1a1a1a;
+        --ust-red: #c8102e;
+        --ust-bg: #f8f9fa;
+    }
+
     body {
-        background-color: #edd2b7;
+        background: linear-gradient(135deg, #111111 0%, #222222 50%, #1a1a1a 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        margin: 0;
+        padding: 20px 15px;
+        color: #333;
     }
 
-    .card-error {
-        max-width: 380px;
-        margin: auto;
-        margin-top: 10vh;
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        body::before {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 199, 44, 0.15) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+    .ust-welcome-card {
+        position: relative;
+        z-index: 1;
+        max-width: 460px;
+        width: 100%;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 40px 32px 35px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
         text-align: center;
+        border-top: 5px solid var(--ust-gold);
+        transition: transform 0.3s ease;
     }
 
-        .card-error i {
-            font-size: 3rem;
-            color: #dc3545;
+    .ust-logo-wrapper {
+        margin-bottom: 20px;
+        display: inline-block;
+        padding: 10px;
+        border-radius: 50%;
+        background: rgba(255, 199, 44, 0.08);
+    }
+
+        .ust-logo-wrapper img {
+            height: 95px;
+            width: auto;
+            object-fit: contain;
         }
 
-        .card-error h4 {
-            margin-top: 15px;
-            font-weight: bold;
+    .ust-card-title {
+        font-weight: 800;
+        color: var(--ust-black);
+        font-size: 1.65rem;
+        letter-spacing: -0.5px;
+        margin-bottom: 6px;
+    }
+
+    .ust-card-subtitle {
+        color: var(--ust-red);
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 18px;
+    }
+
+    .ust-description {
+        font-size: 0.93rem;
+        color: #555555;
+        line-height: 1.6;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .ust-features-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 28px;
+        padding: 12px 10px;
+        background-color: #fdfbf7;
+        border: 1px solid #f1e6d0;
+        border-radius: 12px;
+    }
+
+    .ust-feature-item {
+        flex: 1;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #444;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+        .ust-feature-item i {
+            font-size: 1.25rem;
+            color: var(--ust-black);
         }
 
-        .card-error p {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #555;
+    .btn-ust-primary {
+        background: linear-gradient(135deg, var(--ust-gold) 0%, var(--ust-gold-dark) 100%);
+        color: #111111;
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 12px 20px;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(255, 199, 44, 0.35);
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+    }
+
+        .btn-ust-primary:hover {
+            background: linear-gradient(135deg, #ffd359 0%, var(--ust-gold) 100%);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255, 199, 44, 0.45);
         }
 
-        .card-error .btn {
-            margin-top: 20px;
+    .ust-footer-text {
+        margin-top: 22px;
+        font-size: 0.78rem;
+        color: #888;
+    }
+
+        .ust-footer-text a {
+            color: var(--ust-black);
+            font-weight: 600;
+            text-decoration: underline;
         }
 </style>
 
-<div class="card-error">
-    @*<i class="bi bi-house-door"></i>*@
-    <img src="../Content/Images/Alumni-DigitalId-logo.png" style="height: 100px" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-family/6.4.0/css/all.min.css" />
 
-    <h4>Welcome</h4>
-    <p style="text-align: justify; text-justify: inter-word;">
-        A Digital ID is a secure, digital representation of a person's identity that can be used for online authentication and access to services, both public and private. It's a way to prove who you are electronically, streamlining various processes and reducing reliance on physical documents. Digital IDs can store various forms of identity information, including biographical data, biometrics, and other relevant attributes, often using encryption and secure storage methods.
+<div class="ust-welcome-card">
+    <div class="ust-logo-wrapper">
+        <img src="~/Content/Images/Alumni-DigitalId-logo.png" alt="UST Alumni Digital ID Logo" />
+    </div>
+
+    <h3 class="ust-card-title">Welcome Home, Thomasian!</h3>
+    <div class="ust-card-subtitle">University of Santo Tomas Alumni Portal</div>
+
+    <p class="ust-description">
+        Your UST Alumni Digital ID serves as your official digital credential. Enjoy seamless campus entry, instant verification, and exclusive access to alumni perks wherever you go.
     </p>
-    <a href="@Url.Action("Login", "Account")" class="btn btn-danger w-100">Login</a>
 
-
-
-
-        @*<button type="button" class="btn btn-danger" id="generate-qrcode-button">
-            <i class="fa-regular fa-circle-check"></i> Generate
-        </button>*@
-</div>
-<!--
-
-<div class="container perk-detail-container">
-    @*<div class="perk-detail-banner text-center mb-4">
-            <div class="text-center mt-4">
-                <a href="@Url.Action("Perks", "Alumni")" class="btn btn-primary">BACK TO PERKS</a>
-            </div>
-            <div class="perk-detail-image" style="background-image:url('../Perks/@Model.Id@Model.FileType')"></div>
-        </div>*@
-    HOME
-    Tell me something DigitalID.com.ph
-    <div class="perk-detail-card">
-        <div class="perk-detail-body">
-
-            <a class="btn mt-4 w-100 btn-secondary" href="@Url.Action("Login", "Account")">Login</a>
+    <div class="ust-features-grid">
+        <div class="ust-feature-item">
+            <i class="fa-solid fa-id-card"></i>
+            <span>Digital ID</span>
+        </div>
+        <div class="ust-feature-item">
+            <i class="fa-solid fa-gift"></i>
+            <span>Alumni Perks</span>
+        </div>
+        <div class="ust-feature-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Verified</span>
         </div>
     </div>
+
+    <a href="@Url.Action("Login", "Account")" class="btn-ust-primary w-100">
+        <i class="fa-solid fa-right-to-bracket"></i> Login to Digital ID
+    </a>
+
+    <div class="ust-footer-text">
+        Need assistance? <a href="mailto:alumni@ust.edu.ph">Contact Alumni Office</a>
+    </div>
 </div>
-    -->
-@*<section class="login d-flex align-items-center">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-5">
-                    <h1 class="login-logo text-center text-white mb-4">
-                        <i class="fa-solid fa-house-user"></i> <span class="ms-3">Welcome</span>
-
-                    </h1>
-
-                    <div class="login-form shadow-sm border border-light">
-                        Tell me something DigitalID.com.ph
-                        <a class="btn mt-4 w-100 btn-secondary" href="@Url.Action("Login", "Account")">Login</a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>*@

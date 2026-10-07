@@ -1,25 +1,162 @@
-﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Misc_model
-
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.Misc_model
 
 @{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About Us";
 }
 
 @section Scripts{
     <script src="~/Scripts/Home.js"></script>
-
 }
 
-<div class="container">
-    <div class="about-banner text-center mb-4">
-        <h2 class="mt-4 mb-4">ABOUT US</h2>
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    .about-container {
+        max-width: 850px;
+        margin: 0 auto 40px auto;
+    }
+
+    .about-hero-banner {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        color: #ffffff;
+        padding: 28px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(128, 0, 32, 0.18);
+        margin-bottom: 24px;
+        text-align: center;
+    }
+
+        .about-hero-banner h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .about-hero-banner p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 6px;
+            margin-bottom: 0;
+        }
+
+    .about-detail-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 32px 28px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .about-detail-body {
+        color: #334155;
+        font-size: 0.95rem;
+        line-height: 1.75;
+    }
+
+        .about-detail-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin: 20px auto;
+            display: block;
+            border: 1px solid #e2e8f0;
+        }
+
+        .about-detail-body h1,
+        .about-detail-body h2,
+        .about-detail-body h3,
+        .about-detail-body h4 {
+            color: var(--ust-red);
+            font-weight: 700;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .about-detail-body h3 {
+            font-size: 1.2rem;
+        }
+
+        .about-detail-body h4 {
+            font-size: 1.08rem;
+        }
+
+        .about-detail-body p {
+            margin-bottom: 16px;
+        }
+
+        .about-detail-body ul,
+        .about-detail-body ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .about-detail-body li {
+            margin-bottom: 8px;
+        }
+
+    .about-footer-notice {
+        background-color: #f8fafc;
+        border-left: 4px solid var(--ust-red);
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 28px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .about-notice-icon {
+        font-size: 1.2rem;
+        color: var(--ust-red);
+        margin-top: 2px;
+    }
+
+    .about-notice-text {
+        font-size: 0.82rem;
+        color: #64748b;
+        margin: 0;
+    }
+</style>
+
+<div class="container my-3 about-container">
+
+    <div class="about-hero-banner">
+        <h2><i class="fa-solid fa-university me-2"></i> About Us</h2>
+        <p>Connecting, engaging, and empowering the UST AMV Alumni Community</p>
     </div>
 
-    <div class="about-detail-card bg-white p-4 pt-1">
-        <div class="perk-detail-body">
-            <p class="perk-detail-text">
-                @(new HtmlString(@Model.Description))
-            </p>
+    <div class="about-detail-card">
+        <div class="about-detail-body">
+            @if (Model != null && !string.IsNullOrEmpty(Model.Description))
+            {
+                @Html.Raw(Model.Description)
+            }
+            else
+            {
+                <p class="text-muted italic">No information available at this time.</p>
+            }
+        </div>
+
+        <div class="about-footer-notice">
+            <div class="about-notice-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="about-notice-text">
+                <strong>UST AMV College of Accountancy Alumni Association:</strong> Dedicated to maintaining lifelong engagement between the college and its distinguished alumni.
+            </div>
         </div>
     </div>
+
 </div>

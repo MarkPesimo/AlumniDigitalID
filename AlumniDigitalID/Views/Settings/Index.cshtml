@@ -8,120 +8,223 @@
     <script src="~/Scripts/Settings/Settings.js"></script>
 }
 
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
 
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
 
-<div class="container py-4" style="max-width: 480px; margin: 0 auto; background-color: #fff;">
-    <div class="text-center mb-4">
-        <h5 class="fw-bold"><i class="bi bi-gear me-2"></i>SETTINGS</h5>
+    .settings-wrapper {
+        max-width: 520px;
+        margin: 0 auto 40px auto;
+    }
+
+    .settings-hero-banner {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        color: #ffffff;
+        padding: 24px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(128, 0, 32, 0.18);
+        margin-bottom: 24px;
+        text-align: center;
+    }
+
+        .settings-hero-banner h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .settings-hero-banner p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+
+    .settings-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    .settings-card-header {
+        background-color: #f8fafc;
+        padding: 12px 18px;
+        border-bottom: 1px solid #edf2f7;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--ust-red);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .settings-list-item {
+        display: flex;
+        align-items: center;
+        padding: 16px 18px;
+        color: #2d3748;
+        text-decoration: none !important;
+        border-bottom: 1px solid #f1f5f9;
+        transition: background-color 0.2s ease;
+        cursor: pointer;
+    }
+
+        .settings-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-list-item:hover {
+            background-color: #f8fafc;
+            color: var(--ust-red);
+        }
+
+    .settings-icon-box {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background-color: rgba(128, 0, 32, 0.08);
+        color: var(--ust-red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        margin-right: 14px;
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+    }
+
+    .settings-list-item:hover .settings-icon-box {
+        background-color: var(--ust-red);
+        color: #ffffff;
+        transform: scale(1.05);
+    }
+
+    .settings-text-box {
+        flex-grow: 1;
+    }
+
+    .settings-item-title {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .settings-item-subtitle {
+        font-size: 0.76rem;
+        color: #64748b;
+        margin-top: 2px;
+        margin-bottom: 0;
+    }
+
+    .settings-arrow {
+        font-size: 0.85rem;
+        color: #cbd5e1;
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .settings-list-item:hover .settings-arrow {
+        color: var(--ust-red);
+        transform: translateX(3px);
+    }
+</style>
+
+<div class="container my-3 settings-wrapper">
+
+    <div class="settings-hero-banner">
+        <h2><i class="fa-solid fa-gear me-2"></i> Account Settings</h2>
+        <p>Manage your account credentials and digital Alumni ID</p>
     </div>
 
-    <div class="row text-center g-3 justify-content-center">
-        <div class="col-12" id="change_username_btn">
-            <a class="text-decoration-none">
-                @*id="change_username_btn">*@
-                <div class="tile rounded py-3 shadow-sm">
-                    <i class="bi bi-person-circle fs-1 icon-color"></i>
-                    <div class="fw-bold mt-2 small">CHANGE USERNAME</div>
-                </div>
-            </a>
+    <div class="settings-card">
+        <div class="settings-card-header">
+            <i class="fa-solid fa-shield-halved"></i> Security & Access
         </div>
+        <div class="list-group list-group-flush">
 
-        <!-- Change Password -->
-        <div class="col-12">
-            <a class="text-decoration-none" id="change_password_btn">
-                <div class="tile rounded py-3 shadow-sm">
-                    <i class="bi bi-shield-lock fs-1 icon-color"></i>
-                    <div class="fw-bold mt-2 small">CHANGE PASSWORD</div>
+            <a class="settings-list-item" id="change_username_btn">
+                <div class="settings-icon-box">
+                    <i class="fa-solid fa-user-gear"></i>
                 </div>
+                <div class="settings-text-box">
+                    <h6 class="settings-item-title">Change Username</h6>
+                    <p class="settings-item-subtitle">Update your account sign-in username</p>
+                </div>
+                <i class="fa-solid fa-chevron-right settings-arrow"></i>
             </a>
-        </div>
 
-        <!-- Change PIN -->
-        <div class="col-12">
-            <a class="text-decoration-none" id="change_pin_btn">
-                <div class="tile rounded py-3 shadow-sm">
-                    @* <i class="bi bi-envelope fs-1 icon-color"></i> *@
-                    <i class="bi bi-three-dots fs-1 icon-color"></i>
-                    <div class="fw-bold mt-2 small">UPDATE PIN</div>
+            <a class="settings-list-item" id="change_password_btn">
+                <div class="settings-icon-box">
+                    <i class="fa-solid fa-lock"></i>
                 </div>
+                <div class="settings-text-box">
+                    <h6 class="settings-item-title">Change Password</h6>
+                    <p class="settings-item-subtitle">Update your portal account password</p>
+                </div>
+                <i class="fa-solid fa-chevron-right settings-arrow"></i>
             </a>
-        </div>
 
-        <!--Download AlumniID-->
-        <div class="col-12">
-            <a href="@Url.Action("DownloadAlumniId", "Settings")" class="text-decoration-none" id="download_id_btn">
-                <div class="tile rounded py-3 shadow-sm">
-                    @* <i class="bi bi-envelope fs-1 icon-color"></i> *@
-                    
-                    <i class="bi bi-file-earmark-arrow-down fs-1 icon-color"></i>
-                    <div class="fw-bold mt-2 small">DOWNLOAD ALUMNI ID</div>
+            <a class="settings-list-item" id="change_pin_btn">
+                <div class="settings-icon-box">
+                    <i class="fa-solid fa-key"></i>
                 </div>
+                <div class="settings-text-box">
+                    <h6 class="settings-item-title">Update PIN</h6>
+                    <p class="settings-item-subtitle">Change your security transaction PIN</p>
+                </div>
+                <i class="fa-solid fa-chevron-right settings-arrow"></i>
             </a>
+
         </div>
-
-        <!--Generate AlumniId-->
-        <div class="col-12">
-            <a class="text-decoration-none" id="regenerate_id_btn">
-                <div class="tile rounded py-3 shadow-sm">
-                    @* <i class="bi bi-envelope fs-1 icon-color"></i> *@
-                    <i class="bi bi-person-badge-fill fs-1 icon-color"></i>
-                    <div class="fw-bold mt-2 small">RE-GENERATE ALUMNI ID</div>
-                </div>
-            </a>
-        </div>
-
-        @*@if ((User as ContextLoginUser_model).UserType == "Super Admin")
-            {
-                <!-- Notification Settings -->
-                <div class="col-12">
-                    <a class="text-decoration-none">
-                        <div class="tile rounded py-3 shadow-sm">
-                            <i class="bi bi-bell fs-1 icon-color"></i>
-                            <div class="fw-bold mt-2 small">NOTIFICATIONS</div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Notification Settings -->
-                <div class="col-12">
-                    <a class="text-decoration-none">
-                        <div class="tile rounded py-3 shadow-sm">
-                            <i class="bi bi-bell fs-1 icon-color"></i>
-                            <div class="fw-bold mt-2 small">NOTIFICATIONS</div>
-                        </div>
-                    </a>
-                </div>
-                }*@
     </div>
+
+    <div class="settings-card">
+        <div class="settings-card-header">
+            <i class="fa-solid fa-id-card"></i> Alumni Identification
+        </div>
+        <div class="list-group list-group-flush">
+
+            <a href="@Url.Action("DownloadAlumniId", "Settings")" class="settings-list-item" id="download_id_btn">
+                <div class="settings-icon-box">
+                    <i class="fa-solid fa-file-arrow-down"></i>
+                </div>
+                <div class="settings-text-box">
+                    <h6 class="settings-item-title">Download Alumni ID</h6>
+                    <p class="settings-item-subtitle">Save a printable digital copy of your Alumni ID</p>
+                </div>
+                <i class="fa-solid fa-chevron-right settings-arrow"></i>
+            </a>
+
+            <a class="settings-list-item" id="regenerate_id_btn">
+                <div class="settings-icon-box">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                </div>
+                <div class="settings-text-box">
+                    <h6 class="settings-item-title">Re-generate Alumni ID</h6>
+                    <p class="settings-item-subtitle">Refresh or re-issue your digital card layout</p>
+                </div>
+                <i class="fa-solid fa-chevron-right settings-arrow"></i>
+            </a>
+
+        </div>
+    </div>
+
 </div>
-
-@*<section class="login d-flex align-items-center">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-5">
-                    <h1 class="login-logo text-center text-white mb-4">
-                        <i class="fa-solid fa-gear"></i> <span class="ms-3">Settings</span>
-                    </h1>
-
-                    <div class="login-form shadow-sm border border-light">
-                        <button type="submit" class="btn mt-2 w-100 btn-secondary" id="change_username_btn">Change Username</button>
-
-                        <button type="submit" class="btn mt-2 w-100 btn-secondary" id="change_password_btn">Change Password</button>
-
-                        <button type="submit" class="btn mt-2 w-100 btn-secondary" id="change_pin_btn">Change PIN</button>
-
-                        @if ((User as ContextLoginUser_model).UserType == "Super Admin")
-                        {
-                            <button type="submit" class="btn mt-2 w-100 btn-secondary" id="Members-btn">Alumni Members</button>
-
-                            <button type="submit" class="btn mt-2 w-100 btn-secondary" id="Perks-btn">Manage Perks & Benefits</button>
-                        }
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>*@
 
 @Html.Partial("~/Views/Settings/Modal/_change_username_modal.cshtml")
 @Html.Partial("~/Views/Settings/Modal/_change_password_modal.cshtml")

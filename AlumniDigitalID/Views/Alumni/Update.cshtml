@@ -1,5 +1,5 @@
-﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model.Profile_model
-         
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model.Profile_model
+
 @{
     ViewBag.Title = "Update Alumni Information";
 }
@@ -8,198 +8,312 @@
     <script src="~/Scripts/Alumni/Update.js"></script>
 }
 
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
 
-    <div class="container">
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
 
-        @*kabejar 7/2/2025*@
-        @*start*@
-        <div class="profile-banner mb-4">
-          
-            <div class="row d-flex align-items-center">
-                <div class="col-auto">
-                    <img src="~/AlumniImages/@(Model.Guid).JPEG"
-                         class="alumni-profile-image"
-                         id="alumni-profile-image"
-                         alt="Responsive image"
-                         onerror="this.src='/AlumniImages/0.JPEG'"
-                         style="cursor: pointer;" />
-                </div>
+    /* Container Card Wrapper */
+    .update-profile-container {
+        max-width: 650px;
+        margin: 0 auto 30px auto;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
 
-                <div class="col d-flex justify-content-center">
-                    <h3 class="mb-0 text-white text-center">
-                        <b>@Model.Firstname.ToUpper() @Model.Lastname.ToUpper()</b>
-                    </h3>
-                </div>
-            </div>
-        </div>
-        @*end*@
+    /* Banner Header */
+    .profile-banner {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        padding: 24px 20px;
+        color: #ffffff;
+        text-align: center;
+        position: relative;
+    }
 
+    .avatar-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
 
-        @using (Html.BeginForm("Add", "Overtime", FormMethod.Post, new { enctype = "multipart/form-data", name = "alumni-profile-update", id = "alumni-profile-update" }))
-        {
-            @Html.HiddenFor(m => m.Id)
-            @Html.HiddenFor(m => m.SchoolId)
-            @Html.HiddenFor(m => m.SchoolName)
-            @Html.HiddenFor(m => m.CourseName)
-            @Html.HiddenFor(m => m.MembershipExpiration)
-            @Html.HiddenFor(m => m.UserType)
-            @Html.HiddenFor(m => m.UserId)
-            @Html.HiddenFor(m => m.Guid)
-            @Html.HiddenFor(m => m.Nationality)
-            @Html.HiddenFor(m => m.AlumniGroupId)
+    .alumni-profile-image {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        transition: transform 0.2s ease, filter 0.2s ease;
+    }
 
-            <div class="row" id="div-validation" style="display: none;">
-                <div class="col mb-3">
-                    <label for="html" id="error-message-label" class="form-label text-danger"></label><br>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.AlumniNo, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextBoxFor(m => m.AlumniNo, new { @class = "form-control bg-secondary text-center text-white", @readonly = "readonly" })
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.MemberType, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextBoxFor(m => m.MemberType, new { @class = "form-control bg-secondary text-center text-white", @readonly = "readonly" })
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Firstname, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextBoxFor(m => m.Firstname, new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Lastname, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextBoxFor(m => m.Lastname, new { @class = "form-control" })
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Middlename, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextBoxFor(m => m.Middlename, new { @class = "form-control" })
-                    </div>
-                </div>
-
-
-            </div>
-
-
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Gender, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.DropDownListFor(m => m.Gender, (IEnumerable<SelectListItem>)ViewBag._Gender, new { @class = "form-select", })
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.CivilStatus, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.DropDownListFor(m => m.CivilStatus, (IEnumerable<SelectListItem>)ViewBag._CivilStatus, new { @class = "form-select", })
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Birthday, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @type = "date", @Value = Model.Birthday.ToString("yyyy-MM-dd") })
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.EmailAddress, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.MobileNo, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="row mt-2">
-                <div class="col">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Address, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextAreaFor(m => m.Address, 4, 40, new { @class = "form-control" })@*, @placeholder = "Description" })*@
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.YearGraduated, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @*@Html.TextBoxFor(m => m.YearGraduated, new { @class = "form-control" })*@
-                        @Html.DropDownListFor(m => m.YearGraduated, (IEnumerable<SelectListItem>)ViewBag._Years, new { @class = "form-select", })
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.SectionName, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.CourseId, new { @class = "font-weight-bold", @style = "text-transform: uppercase" })
-                        @Html.DropDownListFor(m => m.CourseId, (IEnumerable<SelectListItem>)ViewBag._Courses, new { @class = "form-select", })
-                    </div>
-                </div>
-            </div>
-
-            <hr style="border-bottom: solid; border-color: #000;">
-
-            <div class="row mt-4">
-                <div class="col-md-12 text-right profile-btn">
-                    <button type="button" class="btn btn-danger" id="submit-update-button">SAVE CHANGES</button>
-                    <button type="button" class="btn btn-outline-secondary mr-2" id="cancel-update-button">CANCEL</button>
-
-                </div>
-            </div>
+        .alumni-profile-image:hover {
+            transform: scale(1.03);
+            filter: brightness(0.9);
         }
 
-        @*<div class="row mt-4">
+    .avatar-upload-badge {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        background: var(--ust-gold);
+        color: #111111;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #ffffff;
+        font-size: 0.75rem;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
 
-            <button type="button" class="btn  btn-danger" id="submit-update-button">
-                <i class="fa-regular fa-circle-check me-2"></i> Submit Update
-            </button>
-        </div>*@
+    .profile-name-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        margin-top: 4px;
+        margin-bottom: 0;
+    }
 
+    /* Form Content Area */
+    .form-body {
+        padding: 24px;
+    }
+
+    /* Section Cards inside Form */
+    .form-section {
+        background: #fafafa;
+        border: 1px solid #eaeaea;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+
+    .form-section-title {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--ust-red);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid #eaeaea;
+        padding-bottom: 6px;
+    }
+
+    .form-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #4a5568;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        margin-bottom: 4px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        font-size: 0.88rem;
+        padding: 8px 12px;
+        border: 1px solid #cbd5e1;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--ust-red);
+            box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.15);
+        }
+
+    /* Readonly Fields */
+    .form-control-readonly {
+        background-color: #edf2f7 !important;
+        color: #4a5568 !important;
+        font-weight: 600;
+        cursor: not-allowed;
+    }
+
+    /* Action Buttons */
+    .btn-save {
+        background-color: var(--ust-red);
+        color: #ffffff;
+        font-weight: 700;
+        border-radius: 8px;
+        padding: 10px 24px;
+        border: none;
+        transition: background-color 0.2s ease;
+    }
+
+        .btn-save:hover, .btn-save:active {
+            background-color: var(--ust-red-dark);
+            color: #ffffff;
+        }
+
+    .btn-cancel {
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: 600;
+    }
+</style>
+
+<div class="container my-3">
+    <div class="update-profile-container">
+
+        <!-- Top Profile Banner & Avatar -->
+        <div class="profile-banner">
+            <div class="avatar-wrapper">
+                <img src="~/AlumniImages/@(Model.Guid).JPEG"
+                     class="alumni-profile-image"
+                     id="alumni-profile-image"
+                     alt="Profile Picture"
+                     onerror="this.src='/AlumniImages/0.JPEG'"
+                     title="Click to update profile photo" />
+                <div class="avatar-upload-badge" id="btn-change-photo-trigger" title="Change Photo">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+            </div>
+            <h3 class="profile-name-title">
+                @Model.Firstname.ToUpper() @Model.Lastname.ToUpper()
+            </h3>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-body">
+            @using (Html.BeginForm("UpdateProfile", "Alumni", FormMethod.Post, new { enctype = "multipart/form-data", name = "alumni-profile-update", id = "alumni-profile-update" }))
+            {
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.SchoolId)
+                @Html.HiddenFor(m => m.SchoolName)
+                @Html.HiddenFor(m => m.CourseName)
+                @Html.HiddenFor(m => m.MembershipExpiration)
+                @Html.HiddenFor(m => m.UserType)
+                @Html.HiddenFor(m => m.UserId)
+                @Html.HiddenFor(m => m.Guid)
+                @Html.HiddenFor(m => m.Nationality)
+                @Html.HiddenFor(m => m.AlumniGroupId)
+
+                <!-- Dynamic Error Validation Display -->
+                <div class="row" id="div-validation" style="display: none;">
+                    <div class="col-12 mb-3">
+                        <div class="alert alert-danger d-flex align-items-center mb-0" role="alert">
+                            <i class="fa-solid fa-circle-exclamation me-2"></i>
+                            <span id="error-message-label"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 1: Read-Only System Info -->
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <i class="fa-solid fa-id-card"></i> Account & Membership Details
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.AlumniNo)</label>
+                            @Html.TextBoxFor(m => m.AlumniNo, new { @class = "form-control form-control-readonly text-center", @readonly = "readonly" })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.MemberType)</label>
+                            @Html.TextBoxFor(m => m.MemberType, new { @class = "form-control form-control-readonly text-center", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Personal Details -->
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <i class="fa-solid fa-user"></i> Personal Details
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.Firstname)</label>
+                            @Html.TextBoxFor(m => m.Firstname, new { @class = "form-control", @placeholder = "First Name" })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.Lastname)</label>
+                            @Html.TextBoxFor(m => m.Lastname, new { @class = "form-control", @placeholder = "Last Name" })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.Middlename)</label>
+                            @Html.TextBoxFor(m => m.Middlename, new { @class = "form-control", @placeholder = "Middle Name" })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.Birthday)</label>
+                            @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @type = "date", @Value = Model.Birthday.ToString("yyyy-MM-dd") })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.Gender)</label>
+                            @Html.DropDownListFor(m => m.Gender, (IEnumerable<SelectListItem>)ViewBag._Gender, new { @class = "form-select" })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.CivilStatus)</label>
+                            @Html.DropDownListFor(m => m.CivilStatus, (IEnumerable<SelectListItem>)ViewBag._CivilStatus, new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <i class="fa-solid fa-address-book"></i> Contact & Address
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.EmailAddress)</label>
+                            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @type = "email", @placeholder = "Email Address" })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.MobileNo)</label>
+                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "09XXXXXXXXX" })
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.Address)</label>
+                            @Html.TextAreaFor(m => m.Address, 3, 40, new { @class = "form-control", @placeholder = "Complete Home Address" })
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <i class="fa-solid fa-graduation-cap"></i> Academic Background
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.YearGraduated)</label>
+                            @Html.DropDownListFor(m => m.YearGraduated, (IEnumerable<SelectListItem>)ViewBag._Years, new { @class = "form-select" })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.SectionName)</label>
+                            @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control", @placeholder = "e.g. 4BSA1" })
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">@Html.DisplayNameFor(m => m.CourseId)</label>
+                            @Html.DropDownListFor(m => m.CourseId, (IEnumerable<SelectListItem>)ViewBag._Courses, new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button type="button" class="btn btn-outline-secondary btn-cancel" id="cancel-update-button">
+                        <i class="fa-solid fa-xmark me-1"></i> Cancel
+                    </button>
+                    <button type="button" class="btn btn-save" id="submit-update-button">
+                        <i class="fa-solid fa-floppy-disk me-1"></i> Save Changes
+                    </button>
+                </div>
+            }
+        </div>
     </div>
+</div>
 
-
-
-            @Html.Partial("~/Views/Alumni/Modal/_change_image_modal.cshtml")
+@Html.Partial("~/Views/Alumni/Modal/_change_image_modal.cshtml")
