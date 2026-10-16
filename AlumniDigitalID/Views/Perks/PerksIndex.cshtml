@@ -1,8 +1,7 @@
-﻿@model  List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model>
-
+﻿@model List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Perk_model.PerkInfo_model>
 
 @{
-    ViewBag.Title = "Perks & Benifits";
+    ViewBag.Title = "Perks & Benefits";
 }
 
 @section Scripts{
@@ -10,67 +9,248 @@
     <script src="~/Scripts/Perks/Perks.js"></script>
 }
 
-    <div class="container">
-        <div class="perks-banner text-center mb-4">
-            <h2 class="mt-4 mb-4">PERKS & BENEFITS</h2>
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
+
+    html, body {
+        height: 100% !important;
+        overflow: hidden !important;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    .profile-screen-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 12px 14px 4px 14px;
+        box-sizing: border-box;
+    }
+
+    .profile-app-container {
+        width: 100%;
+        max-width: 440px;
+        height: calc(100vh - 110px); 
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 14px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .admin-header-card {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        border-radius: 14px;
+        padding: 14px 12px;
+        color: #ffffff;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(128, 0, 32, 0.22);
+        flex-shrink: 0;
+    }
+
+    .admin-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background-color: rgba(255, 255, 255, 0.15);
+        color: var(--ust-gold);
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: 2px 8px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+        border: 1px solid rgba(255, 199, 44, 0.35);
+    }
+
+    .admin-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        margin: 0;
+        color: #ffffff;
+        line-height: 1.1;
+    }
+
+    .controls-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+
+    .add-perk-btn {
+        background-color: var(--ust-red) !important;
+        border-color: var(--ust-red) !important;
+        color: #ffffff !important;
+        width: 38px;
+        height: 38px;
+        border-radius: 10px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(128, 0, 32, 0.25);
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+        .add-perk-btn:hover {
+            background-color: var(--ust-red-dark) !important;
+            transform: translateY(-1px);
+        }
+
+    .search-container {
+        flex: 1;
+    }
+
+    .search-bar {
+        border-radius: 10px !important;
+        border: 1px solid #e0e0e0 !important;
+        font-size: 0.82rem !important;
+        padding: 8px 12px !important;
+        background-color: #fcfcfc;
+    }
+
+        .search-bar:focus {
+            border-color: var(--ust-red) !important;
+            box-shadow: 0 0 0 0.2rem rgba(128, 0, 32, 0.15) !important;
+        }
+
+    .perks-list-wrapper {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 2px;
+    }
+
+    #perks-table {
+        border-collapse: separate;
+        border-spacing: 0 8px;
+        margin: 0;
+    }
+
+        #perks-table tbody tr {
+            background-color: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s ease;
+        }
+
+            #perks-table tbody tr:hover {
+                border-color: rgba(128, 0, 32, 0.2);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            }
+
+        #perks-table td {
+            padding: 10px 12px;
+            border: none;
+        }
+
+    .perk-title-text {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #222222;
+        margin-bottom: 2px;
+    }
+
+    .perk-meta-text {
+        font-size: 0.7rem;
+        color: #666666;
+        line-height: 1.2;
+    }
+
+    .perk-date-text {
+        font-size: 0.65rem;
+        color: #888888;
+    }
+
+    .action-btn-group {
+        display: flex;
+        gap: 4px;
+        justify-content: flex-end;
+    }
+
+        .action-btn-group .btn {
+            padding: 4px 8px !important;
+            font-size: 0.72rem !important;
+            border-radius: 6px !important;
+        }
+</style>
+
+<div class="profile-screen-wrapper">
+    <div class="profile-app-container">
+
+        <div class="admin-header-card">
+            <span class="admin-badge">
+                <i class="fa-solid fa-gem"></i> Exclusive Offers
+            </span>
+            <h2 class="admin-title">Perks & Benefits</h2>
         </div>
 
-        @*<button class="fab-button btn btn-danger btn-sm d-flex align-items-center gap-1" id="add-perk-btn">
-            <i class="bi bi-plus-lg"></i> Add Perk
-        </button>*@
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <!-- Add Perk Floating Button -->
-            <button class="fab-button btn btn-success btn-lg rounded-circle ms-3" id="add-perk-btn" title="Add Perk">
-                <i class="bi bi-plus-lg"></i>
+        <div class="controls-bar">
+            <button class="btn add-perk-btn" id="add-perk-btn" title="Add Perk">
+                <i class="bi bi-plus-lg fs-6"></i>
             </button>
-
-            @*<button class="fab-button btn btn-danger btn-sm d-flex align-items-center gap-1" id="add-perk-btn">
-                <i class="bi bi-plus-lg"></i> Add Perk
-            </button>*@
-
-            <!-- Search Bar -->
-            <input type="text" id="perk-search" class="form-control search-bar" placeholder="Search perks...">
+            <div class="search-container">
+                <input type="text" id="perk-search" class="form-control search-bar" placeholder="Search perks...">
+            </div>
         </div>
 
-
-
-        <div class="row">
-            <table class="table table-striped" id="perks-table">
-                <thead class="thead-light">
+        <div class="perks-list-wrapper">
+            <table class="w-100 border-0" id="perks-table">
+                <thead class="d-none">
                     <tr>
-                        <th scope="col">Perks Title</th>
-                        <th scope="col">Created by</th>
-                        @*<th scope="col">Date Created</th>*@
-                        <th scope="col">
-
-                        </th>
+                        <th>Perk Title</th>
+                        <th>Created By</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var perk in Model)
                     {
                         <tr>
-                            <td class="fw-semibold">@perk.Title</td>
-                            <td>
-                                <small class="text-muted">@perk.CreatedBy</small><br />
-                                <small class="text-muted">@perk.DateCreated.ToShortDateString()</small>
+                            <td class="align-middle">
+                                <div class="perk-title-text">@perk.Title</div>
                             </td>
 
-                            <td class="text-center">
-                                <div class="btn-group btn-group-sm" role="group">
-                                    <button class="btn btn-sm btn-secondary edit-perk-btn" guid="@perk.Guid"><i class="bi bi-pencil-square"></i></button>
-                                    <button class="btn btn-sm btn-danger activate-perk-btn" @perk.ActivateProp guid="@perk.Guid"><i class="bi bi-x-circle"></i></button>
-                                    <button class="btn btn-sm btn-success deactivate-perk-btn" @perk.DeactivateProp guid="@perk.Guid"><i class="bi bi-check-circle"></i></button>
+                            <td class="align-middle">
+                                <div class="perk-meta-text">@perk.CreatedBy</div>
+                                <div class="perk-date-text">@perk.DateCreated.ToShortDateString()</div>
+                            </td>
+
+                            <td class="align-middle text-end">
+                                <div class="action-btn-group">
+                                    <button class="btn btn-outline-secondary edit-perk-btn" guid="@perk.Guid" title="Edit">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger activate-perk-btn" @perk.ActivateProp guid="@perk.Guid" title="Deactivate">
+                                        <i class="bi bi-x-circle"></i>
+                                    </button>
+                                    <button class="btn btn-outline-success deactivate-perk-btn" @perk.DeactivateProp guid="@perk.Guid" title="Activate">
+                                        <i class="bi bi-check-circle"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-
         </div>
+
     </div>
+</div>
 
 @Html.Partial("~/Views/Perks/Modal/_add_perks_modal.cshtml")
 @Html.Partial("~/Views/Perks/Modal/_edit_perks_modal.cshtml")

@@ -1,24 +1,141 @@
-﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model.Profile_model
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model.Profile_model
 
 @{
-    ViewBag.Title = "Alumni Information";
-    
+    ViewBag.Title = "Admin Dashboard";
 }
 
 @section Scripts{
     <script src="~/Scripts/Alumni/Profile.js"></script>
 }
- 
 
-    <div class="container py-4 mt-2" style="margin: 0 auto; background-color: #fff;">
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
 
-        <div class="perks-banner text-center mb-4">
-            <h2 class="mt-4 mb-4">Administrator</h2>
-        </div>
+    html, body {
+        height: 100% !important;
+        overflow: hidden !important;
+        margin: 0;
+        padding: 0;
+    }
 
-        <!-- ID Card -->
-        @{
-            Html.RenderAction("MainMenus", "Settings");
+    .profile-screen-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 16px 14px 6px 14px;
+        box-sizing: border-box;
+    }
+
+    .profile-app-container {
+        width: 100%;
+        max-width: 440px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 4px;
+    }
+
+    .admin-header-card {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        border-radius: 14px;
+        padding: 22px 16px; 
+        color: #ffffff;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(128, 0, 32, 0.22);
+    }
+
+    .admin-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background-color: rgba(255, 255, 255, 0.15);
+        color: var(--ust-gold);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 3px 10px;
+        border-radius: 12px;
+        margin-bottom: 6px;
+        border: 1px solid rgba(255, 199, 44, 0.35);
+    }
+
+    .admin-title {
+        font-size: 1.35rem; 
+        font-weight: 800;
+        margin: 0;
+        color: #ffffff;
+        line-height: 1.2;
+        letter-spacing: 0.4px;
+    }
+
+    .admin-subtitle {
+        font-size: 0.78rem;
+        color: #e2e2e2;
+        margin-top: 4px;
+        font-weight: 400;
+    }
+
+    .menu-section-container {
+        width: 100%;
+    }
+
+        .menu-section-container .tile {
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 14px !important;
+            padding: 16px 8px !important;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
         }
 
+            .menu-section-container .tile:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 14px rgba(128, 0, 32, 0.12) !important;
+                border-color: rgba(128, 0, 32, 0.3);
+            }
+
+        .menu-section-container .icon-color {
+            color: var(--ust-red);
+            font-size: 1.6rem !important;
+        }
+
+        .menu-section-container .fw-bold {
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+            color: #333333;
+            margin-top: 6px !important;
+        }
+</style>
+
+<div class="profile-screen-wrapper">
+    <div class="profile-app-container">
+
+        <div class="admin-header-card">
+            <span class="admin-badge">
+                <i class="fa-solid fa-user-shield"></i> System Portal
+            </span>
+            <h2 class="admin-title">Administrator</h2>
+            <div class="admin-subtitle">Control Panel & Settings</div>
+        </div>
+
+        <div class="menu-section-container">
+            @{
+                Html.RenderAction("MainMenus", "Settings");
+            }
+        </div>
+
     </div>
+</div>

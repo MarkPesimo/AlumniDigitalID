@@ -1,19 +1,15 @@
-﻿@model  List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Menu_model>
+﻿@model List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Menu_model>
 
-
-<div class="row text-center mt-4 g-3">
-    @foreach (var m in Model)
-    {
-        <div class="col-6 col-md-3 col-lg-3">
+    <div class="row text-center g-2 mx-0">
+        @foreach (var m in Model)
+        {
+        <div class="col-6 p-1">
             <a href="@Url.Action(m.MenuAction, m.MenuController)" class="text-decoration-none">
-                <div class="tile rounded py-3 shadow-sm">
-                    <i class="@m.MenuIcon fs-1 icon-color"></i>
-                    <div class="fw-bold mt-2">@m.MenuTitle</div>
+                <div class="tile rounded py-2 shadow-sm">
+                    <i class="@m.MenuIcon icon-color"></i>
+                    <div class="fw-bold">@m.MenuTitle</div>
                 </div>
             </a>
         </div>
-
- 
-    }
-     
-</div>
+        }
+    </div>

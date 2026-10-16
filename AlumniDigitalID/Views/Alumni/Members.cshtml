@@ -1,4 +1,4 @@
-﻿@model  List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Members_model>
+﻿@model List<ZMGModel.ViewModel.ALUMNI.Alumni_Model.Members_model>
 
 @{
     ViewBag.Title = "Members";
@@ -9,75 +9,284 @@
     <script src="~/Scripts/Alumni/Member.js"></script>
 }
 
-<div class="container">
-    <div class="perks-banner text-center mb-4">
-        <h2 class="mt-4 mb-4">Members</h2>
-    </div>
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
 
-    @*<div class="row mb-2">
-            <div class="col-4"><button class="btn btn-sm btn-danger" id="add-perk-btn"><i class="bi bi-plus-lg"></i> Add Members</button></div>
-            <div class="col-8"></div>
-        </div>*@
+    html, body {
+        height: 100% !important;
+        overflow: hidden !important;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <!-- Add Member Floating Button -->
-        <button class="fab-button btn btn-success btn-lg rounded-circle ms-3" id="add-member-btn" title="Add Member">
-            <i class="bi bi-plus-lg"></i>
-        </button>
+    .profile-screen-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 12px 14px 4px 14px;
+        box-sizing: border-box;
+    }
 
-        <!-- Search Bar -->
-        <div class="search-container">
-            <input type="text" id="member-search" class="form-control" placeholder="Search members...">
+    .profile-app-container {
+        width: 100%;
+        max-width: 440px;
+        height: calc(100vh - 110px);
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 14px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .admin-header-card {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        border-radius: 14px;
+        padding: 14px 12px;
+        color: #ffffff;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(128, 0, 32, 0.22);
+        flex-shrink: 0;
+    }
+
+    .admin-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background-color: rgba(255, 255, 255, 0.15);
+        color: var(--ust-gold);
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: 2px 8px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+        border: 1px solid rgba(255, 199, 44, 0.35);
+    }
+
+    .admin-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        margin: 0;
+        color: #ffffff;
+        line-height: 1.1;
+    }
+
+    .controls-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+
+    .add-member-btn {
+        background-color: var(--ust-red) !important;
+        border-color: var(--ust-red) !important;
+        color: #ffffff !important;
+        width: 38px;
+        height: 38px;
+        border-radius: 10px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(128, 0, 32, 0.25);
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+        .add-member-btn:hover {
+            background-color: var(--ust-red-dark) !important;
+            transform: translateY(-1px);
+        }
+
+    .search-container {
+        flex: 1;
+    }
+
+    .search-input {
+        border-radius: 10px !important;
+        border: 1px solid #e0e0e0 !important;
+        font-size: 0.82rem !important;
+        padding: 8px 12px !important;
+        background-color: #fcfcfc;
+    }
+
+        .search-input:focus {
+            border-color: var(--ust-red) !important;
+            box-shadow: 0 0 0 0.2rem rgba(128, 0, 32, 0.15) !important;
+        }
+
+    .members-list-wrapper {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 2px;
+    }
+
+    .member-item-card {
+        background-color: #ffffff;
+        border: 1px solid #eeeeee;
+        border-radius: 12px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+        .member-item-card:hover {
+            border-color: rgba(128, 0, 32, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+    .member-avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--ust-gold);
+        flex-shrink: 0;
+    }
+
+    .member-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .member-name {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #222222;
+        margin-bottom: 1px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .member-course {
+        font-size: 0.72rem;
+        color: #666666;
+        line-height: 1.2;
+    }
+
+    .member-tags {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        margin-top: 3px;
+    }
+
+    .member-badge-type {
+        font-size: 0.62rem;
+        font-weight: 700;
+        color: var(--ust-red);
+        background-color: rgba(128, 0, 32, 0.08);
+        padding: 1px 6px;
+        border-radius: 6px;
+        text-transform: uppercase;
+    }
+
+    .member-batch {
+        font-size: 0.62rem;
+        color: #777777;
+    }
+
+    .action-btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex-shrink: 0;
+    }
+
+        .action-btn-group .btn {
+            padding: 3px 8px !important;
+            font-size: 0.7rem !important;
+            border-radius: 6px !important;
+        }
+</style>
+
+<div class="profile-screen-wrapper">
+    <div class="profile-app-container">
+
+        <div class="admin-header-card">
+            <span class="admin-badge">
+                <i class="fa-solid fa-users"></i> Directory
+            </span>
+            <h2 class="admin-title">Members</h2>
         </div>
-    </div>
 
+        <div class="controls-bar">
+            <button class="btn add-member-btn" id="add-member-btn" title="Add Member">
+                <i class="bi bi-plus-lg fs-6"></i>
+            </button>
+            <div class="search-container">
+                <input type="text" id="member-search" class="form-control search-input" placeholder="Search members...">
+            </div>
+        </div>
 
-    <div class="row">
-        <table class="table table-sm" id="members-table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Member Name</th>
-                    <th scope="col"> </th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var member in Model)
-                {
+        <div class="members-list-wrapper">
+            <table id="members-table" class="w-100 border-0">
+                <thead class="d-none">
                     <tr>
-                        <td>
-                            <div>
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <img src="~/AlumniImages/@(member.Guid).JPEG"
-                                             class="alumni-members-image"
-                                             id="alumni-profile-image"
-                                             alt="Responsive image"
-                                             onerror="this.src='/AlumniImages/0.JPEG'" />
-                                    </div>
-                                    <div class="col">
-                                        <strong class="text-primary">@member.MembersName </strong><br />
-                                        @member.Course<br />
-                                        <small>@member.MemberType</small><br />
-                                        <small>@member.Batch</small>
+                        <th>Member</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var member in Model)
+                    {
+                        <tr>
+                            <td class="p-0 border-0 align-middle">
+                                <div class="member-item-card border-0 shadow-none m-0">
+                                    <img src="~/AlumniImages/@(member.Guid).JPEG"
+                                         class="member-avatar"
+                                         alt="Profile Image"
+                                         onerror="this.src='/AlumniImages/0.JPEG'" />
+
+                                    <div class="member-info">
+                                        <div class="member-name">@member.MembersName</div>
+                                        <div class="member-course">@member.Course</div>
+                                        <div class="member-tags">
+                                            <span class="member-badge-type">@member.MemberType</span>
+                                            <span class="member-batch">Batch @member.Batch</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td class="text-center">
-                            <div class="btn-group btn-group-sm" role="group">
-                                @*<a href="@Url.Action("AdminUpdate", "Alumni", new { _selected_guid = member.Guid})" class="btn btn-sm btn-secondary"> <i class="bi bi-pencil-square"></i></a>*@
+                            <td class="p-0 border-0 text-end align-middle pe-2">
+                                <div class="action-btn-group">
+                                    <button class="btn btn-outline-secondary edit-member-btn" @member.Edit_prop guid="@member.Guid" title="Edit">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger activate-member-btn" @member.Activate_prop guid="@member.Guid" title="Deactivate">
+                                        <i class="bi bi-x-circle"></i>
+                                    </button>
+                                    <button class="btn btn-outline-success deactivate-member-btn" @member.Deactivate_prop guid="@member.Guid" title="Activate">
+                                        <i class="bi bi-check-circle"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
-                                <button class="btn btn-sm btn-secondary edit-member-btn" @member.Edit_prop guid="@member.Guid"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger activate-member-btn" @member.Activate_prop guid="@member.Guid"><i class="bi bi-x-circle"></i></button>
-                                <button class="btn btn-sm btn-success deactivate-member-btn" @member.Deactivate_prop guid="@member.Guid"><i class="bi bi-check-circle"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
     </div>
 </div>
 

@@ -1,184 +1,314 @@
-﻿@model  ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model.Profile_model
+﻿@model ZMGModel.ViewModel.ALUMNI.Alumni_Model.Student_model.Profile_model
 
+<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
 
+    html, body {
+        height: 100% !important;
+        overflow: hidden !important;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
 
-<div class="container">
-    <div class="profile-banner mb-4">
+    .profile-screen-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 12px 14px 4px 14px;
+        box-sizing: border-box;
+    }
 
-        <div class="row d-flex align-items-center">
-            <div class="col-auto">
-                <img src="~/AlumniImages/@(Model.Guid).JPEG"
-                     class="alumni-profile-image"
-                     id="alumni-profile-image"
-                     alt="Responsive image"
-                     onerror="this.src='/AlumniImages/0.JPEG'" />
-            </div>
+    .profile-app-container {
+        width: 100%;
+        max-width: 440px;
+        height: calc(100vh - 110px);
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
 
+    .profile-banner-card {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        border-radius: 14px;
+        padding: 14px 12px;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: 0 4px 12px rgba(128, 0, 32, 0.22);
+        flex-shrink: 0;
+    }
 
-        </div>
-    </div>
+    .alumni-profile-image {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--ust-gold);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        flex-shrink: 0;
+    }
 
+    .banner-title-text {
+        font-size: 1.15rem;
+        font-weight: 800;
+        margin: 0;
+        color: #ffffff;
+        line-height: 1.2;
+    }
 
-    @using (Html.BeginForm("Add", "Overtime", FormMethod.Post, new { enctype = "multipart/form-data", name = "add-member-form", id = "add-member-form" }))
-    {
-        @Html.HiddenFor(m => m.Id)
-        @Html.HiddenFor(m => m.SchoolId)
-        @Html.HiddenFor(m => m.SchoolName)
-        @Html.HiddenFor(m => m.CourseName)
-        @Html.HiddenFor(m => m.MembershipExpiration)
-        @Html.HiddenFor(m => m.UserType)
-        @Html.HiddenFor(m => m.UserId)
-        @Html.HiddenFor(m => m.Guid)
-        @Html.HiddenFor(m => m.Nationality)
-        @Html.HiddenFor(m => m.AlumniGroupId)
+    .banner-subtext {
+        font-size: 0.72rem;
+        color: #e2e2e2;
+        margin-top: 2px;
+    }
 
-        <div class="row" id="div-validation" style="display: none;">
-            <div class="col mb-3">
-                <label for="html" id="error-message-label" class="form-label text-danger"></label><br>
-            </div>
-        </div>
+    .form-scrollable-wrapper {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 4px;
+    }
 
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.AlumniNo, new { @class = "font-weight-bold" })
-                    @Html.TextBoxFor(m => m.AlumniNo, new { @class = "form-control bg-secondary text-center text-white", @readonly = "readonly" })
-                </div>
-            </div>
+        .form-scrollable-wrapper .form-group {
+            margin-bottom: 10px;
+        }
 
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.MemberType, new { @class = "font-weight-bold" })
-                    @Html.DropDownListFor(m => m.MemberType, (IEnumerable<SelectListItem>)ViewBag._MemberType, new { @class = "form-select", })
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Firstname, new { @class = "font-weight-bold" })
-                    @Html.TextBoxFor(m => m.Firstname, new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Lastname, new { @class = "font-weight-bold" })
-                    @Html.TextBoxFor(m => m.Lastname, new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Middlename, new { @class = "font-weight-bold" })
-                    @Html.TextBoxFor(m => m.Middlename, new { @class = "form-control" })
-                </div>
-            </div>
-
-
-        </div>
-
-
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Gender, new { @class = "font-weight-bold" })
-                    @Html.DropDownListFor(m => m.Gender, (IEnumerable<SelectListItem>)ViewBag._Gender, new { @class = "form-select", })
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.CivilStatus, new { @class = "font-weight-bold" })
-                    @Html.DropDownListFor(m => m.CivilStatus, (IEnumerable<SelectListItem>)ViewBag._CivilStatus, new { @class = "form-select", })
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Birthday, new { @class = "font-weight-bold" })
-                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @type = "date", @Value = Model.Birthday.ToString("yyyy-MM-dd") })
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.EmailAddress, new { @class = "font-weight-bold" })
-                    @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.MobileNo, new { @class = "font-weight-bold" })
-                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row mt-2">
-            <div class="col">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Address, new { @class = "font-weight-bold" })
-                    @Html.TextAreaFor(m => m.Address, 4, 40, new { @class = "form-control" })@*, @placeholder = "Description" })*@
-                </div>
-
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.YearGraduated, new { @class = "font-weight-bold" })
-                    @*@Html.TextBoxFor(m => m.YearGraduated, new { @class = "form-control" })*@
-                    @Html.DropDownListFor(m => m.YearGraduated, (IEnumerable<SelectListItem>)ViewBag._Years, new { @class = "form-select", })
-                </div>
-            </div>
-
-            <div class="col-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.SectionName, new { @class = "font-weight-bold" })
-                    @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control" }) @*, @placeholder = "Event Title" })*@
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.CourseId, new { @class = "font-weight-bold" })
-                    @Html.DropDownListFor(m => m.CourseId, (IEnumerable<SelectListItem>)ViewBag._Courses, new { @class = "form-select", })
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col">
-                <div class="form-group">
-                    <label for="" class="font-weight-bold">Attach Profile picture</label>
-                    <input class="form-control" type="file" name="Alumni_Attachment" id="Alumni_Attachment">
-                </div>
-            </div>
-        </div>
+            .form-scrollable-wrapper .form-group.mb-0 {
+                margin-bottom: 0 !important;
             }
 
-            @*<div class="row mt-4">
+        .form-scrollable-wrapper .form-label,
+        .form-scrollable-wrapper label {
+            font-size: 0.72rem !important;
+            font-weight: 700 !important;
+            color: #444444;
+            margin-bottom: 3px !important;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
 
-            <button type="button" class="btn  btn-danger" id="submit-update-button">
+        .form-scrollable-wrapper .form-control,
+        .form-scrollable-wrapper .form-select {
+            border-radius: 8px !important;
+            font-size: 0.82rem !important;
+            padding: 6px 10px !important;
+            border: 1px solid #dcdcdc;
+            background-color: #fafafa;
+        }
+
+            .form-scrollable-wrapper .form-control:focus,
+            .form-scrollable-wrapper .form-select:focus {
+                border-color: var(--ust-red) !important;
+                box-shadow: 0 0 0 0.2rem rgba(128, 0, 32, 0.12) !important;
+                background-color: #ffffff;
+            }
+
+    .readonly-alumni-no {
+        background-color: var(--ust-red) !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.8px;
+        border: none !important;
+    }
+
+    .submit-btn-container {
+        flex-shrink: 0;
+        padding-top: 4px;
+    }
+
+    .btn-submit-update {
+        background-color: var(--ust-red);
+        border-color: var(--ust-red);
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.85rem;
+        border-radius: 10px;
+        padding: 10px;
+        width: 100%;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(128, 0, 32, 0.2);
+    }
+
+        .btn-submit-update:hover {
+            background-color: var(--ust-red-dark);
+            border-color: var(--ust-red-dark);
+            color: #ffffff;
+        }
+</style>
+
+<div class="profile-screen-wrapper">
+    <div class="profile-app-container">
+
+        <div class="profile-banner-card">
+            <img src="~/AlumniImages/@(Model.Guid).JPEG"
+                 class="alumni-profile-image"
+                 id="alumni-profile-image"
+                 alt="Profile Image"
+                 onerror="this.src='/AlumniImages/0.JPEG'" />
+            <div>
+                <h2 class="banner-title-text">Profile Information</h2>
+                <div class="banner-subtext">Update your personal details below</div>
+            </div>
+        </div>
+
+        <div class="form-scrollable-wrapper">
+            @using (Html.BeginForm("Add", "Overtime", FormMethod.Post, new { enctype = "multipart/form-data", name = "add-member-form", id = "add-member-form", @class = "mb-0" }))
+            {
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.SchoolId)
+                @Html.HiddenFor(m => m.SchoolName)
+                @Html.HiddenFor(m => m.CourseName)
+                @Html.HiddenFor(m => m.MembershipExpiration)
+                @Html.HiddenFor(m => m.UserType)
+                @Html.HiddenFor(m => m.UserId)
+                @Html.HiddenFor(m => m.Guid)
+                @Html.HiddenFor(m => m.Nationality)
+                @Html.HiddenFor(m => m.AlumniGroupId)
+
+                <div class="row" id="div-validation" style="display: none;">
+                    <div class="col mb-2">
+                        <label for="html" id="error-message-label" class="form-label text-danger"></label>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.AlumniNo)
+                            @Html.TextBoxFor(m => m.AlumniNo, new { @class = "form-control readonly-alumni-no text-center", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.MemberType)
+                            @Html.DropDownListFor(m => m.MemberType, (IEnumerable<SelectListItem>)ViewBag._MemberType, new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Firstname)
+                            @Html.TextBoxFor(m => m.Firstname, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Lastname)
+                            @Html.TextBoxFor(m => m.Lastname, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Middlename)
+                            @Html.TextBoxFor(m => m.Middlename, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Gender)
+                            @Html.DropDownListFor(m => m.Gender, (IEnumerable<SelectListItem>)ViewBag._Gender, new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CivilStatus)
+                            @Html.DropDownListFor(m => m.CivilStatus, (IEnumerable<SelectListItem>)ViewBag._CivilStatus, new { @class = "form-select" })
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Birthday)
+                            @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @type = "date", @Value = Model.Birthday.ToString("yyyy-MM-dd") })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.EmailAddress)
+                            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.MobileNo)
+                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Address)
+                            @Html.TextAreaFor(m => m.Address, 2, 40, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.YearGraduated)
+                            @Html.DropDownListFor(m => m.YearGraduated, (IEnumerable<SelectListItem>)ViewBag._Years, new { @class = "form-select" })
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SectionName)
+                            @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CourseId)
+                            @Html.DropDownListFor(m => m.CourseId, (IEnumerable<SelectListItem>)ViewBag._Courses, new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2 mb-0">
+                    <div class="col-12">
+                        <div class="form-group mb-0">
+                            <label for="Alumni_Attachment">Attach Profile Picture</label>
+                            <input class="form-control" type="file" name="Alumni_Attachment" id="Alumni_Attachment">
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="submit-btn-container">
+            <button type="button" class="btn btn-submit-update" id="submit-update-button">
                 <i class="fa-regular fa-circle-check me-2"></i> Submit Update
             </button>
-        </div>*@
-
         </div>
+
+    </div>
+</div>

@@ -1,30 +1,192 @@
-﻿<div class="modal fade" id="add_member_modal" tabindex="-1" aria-labelledby="addPerkLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content shadow-lg rounded-4 border-0">
+﻿<style>
+    :root {
+        --ust-red: #800020;
+        --ust-red-dark: #5a0016;
+        --ust-gold: #ffc72c;
+    }
 
-            <!-- Header -->
-            <div class="modal-header bg-success text-white rounded-top-4">
-                <h5 class="modal-title fw-semibold" id="addmemberLabel">
+    #add_member_modal .modal-dialog {
+        max-width: 92% !important;
+        width: 620px;
+        margin: 1.25rem auto;
+    }
+
+    @@media (min-width: 768px) {
+        #add_member_modal .modal-dialog {
+            max-width: 620px !important;
+        }
+    }
+
+    #add_member_modal .modal-content {
+        border-radius: 18px !important;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        max-height: 88vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #add_member_modal .modal-header-ust {
+        background: linear-gradient(135deg, var(--ust-red) 0%, var(--ust-red-dark) 100%);
+        color: #ffffff;
+        padding: 14px 20px;
+        border-bottom: 2px solid var(--ust-gold);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+    }
+
+    #add_member_modal .modal-title {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+    }
+
+    #add_member_modal .modal-title i {
+        color: var(--ust-gold);
+    }
+
+    #add_member_modal .modal-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    #add_member_modal .modal-body .profile-screen-wrapper {
+        padding: 0 !important;
+        height: auto !important;
+        min-height: auto !important;
+    }
+
+    #add_member_modal .modal-body .profile-app-container {
+        padding: 0 !important;
+        height: auto !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        gap: 0 !important;
+        margin: 0 !important;
+    }
+
+    #add_member_modal .modal-body .profile-banner-card,
+    #add_member_modal .modal-body .admin-header-card,
+    #add_member_modal .modal-body .profile-banner,
+    #add_member_modal .modal-body .submit-btn-container {
+        display: none !important;
+    }
+
+    #add_member_modal .modal-body .form-scrollable-wrapper {
+        padding-right: 0 !important;
+        overflow: visible !important;
+    }
+    #add_member_modal .form-label,
+    #add_member_modal label {
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        color: #444444;
+        margin-bottom: 3px !important;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    #add_member_modal .form-control,
+    #add_member_modal .form-select {
+        border-radius: 8px !important;
+        font-size: 0.82rem !important;
+        padding: 7px 10px !important;
+        border: 1px solid #dcdcdc;
+        background-color: #fafafa;
+    }
+
+    #add_member_modal .form-control:focus,
+    #add_member_modal .form-select:focus {
+        border-color: var(--ust-red) !important;
+        box-shadow: 0 0 0 0.2rem rgba(128, 0, 32, 0.12) !important;
+        background-color: #ffffff;
+    }
+
+    #add_member_modal .readonly-alumni-no {
+        background-color: var(--ust-red) !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        border: none !important;
+    }
+
+    #add_member_modal .modal-footer-ust {
+        background-color: #f8f9fa;
+        padding: 12px 20px;
+        border-top: 1px solid #eeeeee;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+
+    #add_member_modal .btn-cancel {
+        background-color: #e2e6ea;
+        color: #333333;
+        border: none;
+        font-weight: 600;
+        font-size: 0.82rem;
+        padding: 8px 18px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    #add_member_modal .btn-cancel:hover {
+        background-color: #d3d9df;
+        color: #111111;
+    }
+
+    #add_member_modal .btn-save {
+        background-color: var(--ust-red);
+        color: #ffffff;
+        border: none;
+        font-weight: 700;
+        font-size: 0.82rem;
+        padding: 8px 22px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(128, 0, 32, 0.25);
+    }
+
+    #add_member_modal .btn-save:hover {
+        background-color: var(--ust-red-dark);
+        color: #ffffff;
+    }
+</style>
+
+<div class="modal fade" id="add_member_modal" tabindex="-1" aria-labelledby="addmemberLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header-ust">
+                <h5 class="modal-title" id="addmemberLabel">
                     <i class="fa-solid fa-user-plus"></i> Add Member
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <!-- Body -->
-            <div class="modal-body px-4 py-3">
-             
-
+            <div class="modal-body">
             </div>
 
-            <!-- Footer -->
-            <div class="modal-footer bg-light rounded-bottom-4 px-4 py-3">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <div class="modal-footer-ust">
+                <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">
                     <i class="fas fa-times me-1"></i> Cancel
                 </button>
-                <button type="button" class="btn btn-success" id="add-members-button">
+                <button type="button" class="btn btn-save" id="add-members-button">
                     <i class="fas fa-check-circle me-1"></i> Save
                 </button>
             </div>
+
         </div>
     </div>
 </div>
